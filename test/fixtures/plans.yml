@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  start_date: 2015-12-07
+  status_id: 1
+  meeting_id: 1
+  priority_id: 1
+  rating: MyString
+
+two:
+  name: MyString
+  start_date: 2015-12-07
+  status_id: 1
+  meeting_id: 1
+  priority_id: 1
+  rating: MyString

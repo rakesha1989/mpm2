@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  suffix: MyString
+  name: MyString
+  sector: MyString
+  cin_no: MyString
+  pan_no: MyString
+
+two:
+  suffix: MyString
+  name: MyString
+  sector: MyString
+  cin_no: MyString
+  pan_no: MyString

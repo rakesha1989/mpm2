@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
 
+  resources :priorities
+  resources :categories
+  resources :activities
+  resources :statuses
+  resources :plan_categories
+  resources :assignment_users
+  resources :meeting_users
+  resources :assignments
+  resources :plans
+  resources :meetings
+  resources :companies
   devise_for :users
   root 'home#index'
 

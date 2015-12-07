@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Plan Categories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Plan</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @plan_categories.each do |plan_category| %>
+      <tr>
+        <td><%= plan_category.plan_id %></td>
+        <td><%= plan_category.category_id %></td>
+        <td><%= link_to 'Show', plan_category %></td>
+        <td><%= link_to 'Edit', edit_plan_category_path(plan_category) %></td>
+        <td><%= link_to 'Destroy', plan_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Plan category', new_plan_category_path %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plan_month: 2015-12-07
+  date: 2015-12-07 14:55:34
+  company_id: 1
+  category: MyString
+
+two:
+  plan_month: 2015-12-07
+  date: 2015-12-07 14:55:34
+  company_id: 1
+  category: MyString

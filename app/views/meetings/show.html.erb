@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Plan month:</strong>
+  <%= @meeting.plan_month %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @meeting.date %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @meeting.company_id %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @meeting.category %>
+</p>
+
+<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
+<%= link_to 'Back', meetings_path %>

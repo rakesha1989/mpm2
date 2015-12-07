@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Assignment Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Assignment</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignment_users.each do |assignment_user| %>
+      <tr>
+        <td><%= assignment_user.assignment_id %></td>
+        <td><%= assignment_user.user_id %></td>
+        <td><%= link_to 'Show', assignment_user %></td>
+        <td><%= link_to 'Edit', edit_assignment_user_path(assignment_user) %></td>
+        <td><%= link_to 'Destroy', assignment_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Assignment user', new_assignment_user_path %>
