@@ -21,11 +21,11 @@
   </div>
   <div class="field">
     <%= f.label :company_id %><br>
-    <%= f.number_field :company_id %>
+    <%= f.collection_select :company_id, Company.all, :id, :name, prompt: "select Company" %>
   </div>
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.text_field :category %>
+    <%= f.select :category, %w[MPM MRM] %>
   </div>
   <div class="actions">
     <%= f.submit %>

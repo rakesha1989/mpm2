@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
 
+  resources :plans do
+    resources :assignments
+  end
+
+  resources :meetings do
+    resources :plans
+  end
+
+  
+
+  get 'assignments/mark_as_complete'
+  get 'assignments/mark_as_incomplete'
+
+
   resources :priorities
   resources :categories
   resources :activities
@@ -11,7 +25,7 @@ Rails.application.routes.draw do
   resources :plans
   resources :meetings
   resources :companies
-  devise_for :users, controllers: { sessions: "sessions" }
+  devise_for :users
   root 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

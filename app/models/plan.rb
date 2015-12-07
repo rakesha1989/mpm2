@@ -1,5 +1,6 @@
 class Plan < ActiveRecord::Base
 
+	has_many :assignments
 	belongs_to :meeting
 	belongs_to :priority
 	belongs_to :status
@@ -8,7 +9,7 @@ class Plan < ActiveRecord::Base
 
 	
 def details
-	"#{name} - #{start_date} - #{rating}"
+	"#{name} - #{start_date} - <Rating-></Rating->#{rating}"
 end
 
 def list

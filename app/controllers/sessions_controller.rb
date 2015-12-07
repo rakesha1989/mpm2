@@ -2,8 +2,9 @@ class SessionsController < Devise::SessionsController
 
 	private
 
+	
 	def sign_in_params
-		params.require(:user).permit(:name, :email, :password)
+		params.require(:user).permit(:name, :email, :password, :password_confirmation)
 	end
 
 	def account_update_params

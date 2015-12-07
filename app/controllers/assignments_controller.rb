@@ -25,16 +25,21 @@ class AssignmentsController < ApplicationController
   # POST /assignments.json
   def create
     @assignment = Assignment.new(assignment_params)
+    @assignment_user=AssignmentUser.new
+    @plan = Plan.find(params[:plan_id]
 
     respond_to do |format|
       if @assignment.save
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
+        @assignment_user.assignment_id = @assignment.id
+        @assignment_user.save
+        format.html { redirect_to plan_path(@plan), notice: 'Assignment was successfully created.' }
         format.json { render :show, status: :created, location: @assignment }
       else
         format.html { render :new }
         format.json { render json: @assignment.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   # PATCH/PUT /assignments/1

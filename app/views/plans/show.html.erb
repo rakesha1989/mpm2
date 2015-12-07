@@ -32,3 +32,78 @@
 
 <%= link_to 'Edit', edit_plan_path(@plan) %> |
 <%= link_to 'Back', plans_path %>
+
+
+
+<%= form_for([@plan, @plan.assignments.build]) do |f| %>
+  
+ <% assignments = @plan.assignments %>
+<h3> Total Assignments - <%= assignments.size %></h3>
+
+<h3> Add Assignments </h3>
+
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :due_at %><br>
+    <%= f.date_select :due_at %>
+  </div>
+  <div class="field">
+    <%= f.label :activity_id %><br>
+    <%= f.collection_select :activity_id, Activity.all, :id, :name, prompt: "Select Activity" %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br>
+    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select Category" %>
+  </div>
+    <div class="field">
+    <%= f.label :Assign_To %><br>
+    <%= f.collection_select :temp, Employee.all, :id, :name, prompt: "Selecty Employee" %>
+  </div>
+  <div class="field">
+    <%= f.label :completed %><br>
+    <%= f.check_box :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<ul>
+<% for assignment in @plan.assignments %>
+  <li>
+    <%= assignment.details %>
+  </li>
+  <% end %>
+</ul>
+
+<% pending_assignments = @plan.assignments.where('status = ? AND due_at < ?', false, Date.today) %>
+<h3> Pending assignments </h3>
+<ul>
+  <% for assignment in pending_assignments %>
+  <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> ago </small></li>
+  <% end %>
+</ul>
+
+<% assigned_assignments = @plan.assignments.where('status = ? AND due_at >= ?', false, Date.today) %>
+<h3> Assigned assignments </h3>
+<ul>
+  <% for assignment in assigned_assignments %>
+  <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> from now </small>
+  <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %></li>
+  <% end %>
+</ul>
+
+<% completed_assignments = @plan.assignments.where('status = ?', true) %>
+<h3> Completed Assignments </h3>
+<ul>
+  <% for assignment in completed_assignments %>
+  <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.updated_at) %> 
+  <%= assignment.updated_at < Time.now ? "ago" : "from now" %>
+   </small>
+   <%= link_to "mark as incomplete", assignments_mark_as_incomplete_path(assignment_id: assignment.id) %></li>
+  <% end %>
+</ul>

@@ -7,6 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<% if user_signed_in? %>
+<p> Hello, <%= current_user.email %> | <%= link_to "Company", companies_path %> |<%= link_to "Meetings", meetings_path %> | <%= link_to "Plans", plans_path %> | <%= link_to "Assignment", assignments_path %> | <%= link_to 'Home', root_path %> | <%= link_to "sign_out", destroy_user_session_path, :method => 'delete' %> | <%= link_to "Status", statuses_path %> | <%= link_to "Activity", activities_path %> | <%= link_to "Priority", priorities_path %>| <%= link_to "Category", categories_path %> |</p>	
+<% end %>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <%= yield %>
