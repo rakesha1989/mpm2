@@ -1,49 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<p>
   <strong>Name:</strong>
-  <%= @plan.name %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @plan.start_date %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @plan.status.name %>
-</p>
-
-<p>
-  <strong>Meeting:</strong>
-  <%= @plan.meeting.plan_month %>
-</p>
-
-<p>
-  <strong>Priority:</strong>
-  <%= @plan.priority.name %>
-</p>
-
-<p>
-  <strong>Rating:</strong>
-  <%= @plan.rating %>
-</p>
+  <%= @plan.name %> |  <strong>Start date:</strong>
+  <%= @plan.start_date %>|   <strong>Status:</strong>
+  <%= @plan.status.name %>|   <strong>Meeting:</strong>
+  <%= @plan.meeting.plan_month %>| <strong>Priority:</strong>
+  <%= @plan.priority.name %>| <strong>Rating:</strong>
+  <%= @plan.rating %>| 
 
 <%= link_to 'Edit', edit_plan_path(@plan) %> |
 <%= link_to 'Back', plans_path %>
 
 
 
-
-<%= form_for([@plan, @plan.assignments.build]) do |f| %>
-  
- <% assignments = @plan.assignments %>
-<h3> Total Assignments - <%= @plan.assignments.size %></h3>
 <ul>
 <% for assignment in @plan.assignments %>
   <li>
-    <%= @assignments.details %>
+    <%= assignment.details %>
   </li>
   <% end %>
 </ul>
@@ -75,6 +48,10 @@
    <%= link_to "mark as incomplete", assignments_mark_as_incomplete_path(assignment_id: assignment.id) %></li>
   <% end %>
 </ul>
+
+<%= form_for([@plan, @plan.assignments.build]) do |f| %>
+<% assignments = @plan.assignments %>
+<h3> Total Assignments - <%= assignments.size %></h3>
 
 <h3> Add Assignments </h3>
 
