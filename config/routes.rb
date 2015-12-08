@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :plan_assignments
+ 
   resources :plans do
     resources :assignments
   end
@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   resources :plans
   resources :meetings
   resources :companies
+  resources :plan_assignments
+
   devise_for :users
   root 'home#index'
 

@@ -22,17 +22,18 @@ Assignment.where('plan_id =?',id).pluck(:name)
 end
 
 def self.completed_assignments
-	Assignment.where("status = ?", true)
+	Assignment.where("is_completed = ?", true)
 
 end
 
-def self.assigned_assigned_assignments
-	Assignment.where("status = ? AND due_at >= ?", false,Date.today)
+def self.assigned_assignments
+	Assignment.where("is_completed = ? AND due_at >= ?", false,Date.today)
 
 end
 
 def self.pending_assignments(date)
-	Assignment.where("due_at < ? AND status = ?", date,false)
+	Assignment.where("due_at < ? AND is_completed = ?", date,false)
 
 end
+
 end

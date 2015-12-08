@@ -1,5 +1,6 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
+  before_action :find_record, only: [:edit, :show, :update, :destroy]
 
   # GET /assignments
   # GET /assignments.json
@@ -10,6 +11,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1
   # GET /assignments/1.json
   def show
+    @assignment = Assignment.find(params[:id])
   end
 
   # GET /assignments/new
@@ -24,21 +26,10 @@ class AssignmentsController < ApplicationController
   # POST /assignments
   # POST /assignments.json
   def create
-    @plan_assignment=PlanAssignment.new(plan_assignment_params)
     @assignment = Assignment.new(assignment_params)
-    @assignment_user=AssignmentUser.new
     @plan = Plan.find(params[:plan_id])
-    @plan_assignment.plan_id = @plan.id
-
-    
-
-
     respond_to do |format|
       if @assignment.save
-        @plan_assignment.assignment_id = @assignment.id
-        @assignment_user.assignment_id = @assignment.id
-        @plan_assignment.save
-        @assignment_user.save
         format.html { redirect_to plan_path(@plan), notice: 'Assignment was successfully created.' }
         format.json { render :show, status: :created, location: @assignment }
       else
@@ -72,17 +63,22 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  def mark_as_complete
+
+def mark_as_complete
     @assignment = Assignment.find(params[:assignment_id])
     @assignment.update_attributes(is_completed: true)
     redirect_to :back
   end
 
-  def mark_as_incomplete
+def mark_as_incomplete
     @assignment = Assignment.find(params[:assignment_id])
     @assignment.update_attributes(is_completed: false)
     redirect_to :back
   end
+
+def completed_assignments
+
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -92,6 +88,19 @@ class AssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignment_params
-      params.require(:assignment).permit(:name, :due_at, :activity_id, :category_id, :is_completed)
+      params.require(:assignment).permit(:name, :due_at, :activity_id, :category_id, :status, :temp)
     end
+
+
+
+    def find_record
+    begin
+    @assignment = Assignment.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, notice: "Record Doesn't exist"
+  end
+end
+
+
+
 end

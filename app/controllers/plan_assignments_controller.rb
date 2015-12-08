@@ -25,7 +25,6 @@ class PlanAssignmentsController < ApplicationController
   # POST /plan_assignments.json
   def create
     @plan_assignment = PlanAssignment.new(plan_assignment_params)
-
     respond_to do |format|
       if @plan_assignment.save
         format.html { redirect_to @plan_assignment, notice: 'Plan assignment was successfully created.' }
