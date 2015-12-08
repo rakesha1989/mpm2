@@ -8,7 +8,7 @@ class Assignment < ActiveRecord::Base
 	has_many :assignment_users
 	has_many :users, through: :assignment_users
 
-	def details
+def details
 	" #{name} - #{due_at} "
 end
 

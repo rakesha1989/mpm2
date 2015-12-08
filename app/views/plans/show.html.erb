@@ -33,10 +33,17 @@
 <%= link_to 'Edit', edit_plan_path(@plan) %> |
 <%= link_to 'Back', plans_path %>
 
+
+
+
+<%= form_for([@plan, @plan.assignments.build]) do |f| %>
+  
+ <% assignments = @plan.assignments %>
+<h3> Total Assignments - <%= @plan.assignments.size %></h3>
 <ul>
 <% for assignment in @plan.assignments %>
   <li>
-    <%= assignment.details %>
+    <%= @assignments.details %>
   </li>
   <% end %>
 </ul>
@@ -68,13 +75,6 @@
    <%= link_to "mark as incomplete", assignments_mark_as_incomplete_path(assignment_id: assignment.id) %></li>
   <% end %>
 </ul>
-
-
-
-<%= form_for([@plan, @plan.assignments.build]) do |f| %>
-  
- <% assignments = @plan.assignments %>
-<h3> Total Assignments - <%= assignments.size %></h3>
 
 <h3> Add Assignments </h3>
 
