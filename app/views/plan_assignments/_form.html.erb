@@ -1,0 +1,25 @@
+<%= form_for(@plan_assignment) do |f| %>
+  <% if @plan_assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@plan_assignment.errors.count, "error") %> prohibited this plan_assignment from being saved:</h2>
+
+      <ul>
+      <% @plan_assignment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :plan_id %><br>
+    <%= f.number_field :plan_id %>
+  </div>
+  <div class="field">
+    <%= f.label :assignment_id %><br>
+    <%= f.number_field :assignment_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

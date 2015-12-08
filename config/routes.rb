@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :plan_assignments
   resources :plans do
     resources :assignments
   end

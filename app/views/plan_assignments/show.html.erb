@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Plan:</strong>
+  <%= @plan_assignment.plan_id %>
+</p>
+
+<p>
+  <strong>Assignment:</strong>
+  <%= @plan_assignment.assignment_id %>
+</p>
+
+<%= link_to 'Edit', edit_plan_assignment_path(@plan_assignment) %> |
+<%= link_to 'Back', plan_assignments_path %>

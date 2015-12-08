@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Plan Assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Plan</th>
+      <th>Assignment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @plan_assignments.each do |plan_assignment| %>
+      <tr>
+        <td><%= plan_assignment.plan_id %></td>
+        <td><%= plan_assignment.assignment_id %></td>
+        <td><%= link_to 'Show', plan_assignment %></td>
+        <td><%= link_to 'Edit', edit_plan_assignment_path(plan_assignment) %></td>
+        <td><%= link_to 'Destroy', plan_assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Plan assignment', new_plan_assignment_path %>

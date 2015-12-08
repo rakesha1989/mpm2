@@ -24,13 +24,20 @@ class AssignmentsController < ApplicationController
   # POST /assignments
   # POST /assignments.json
   def create
+    @plan_assignment=PlanAssignment.new(plan_assignment_params)
     @assignment = Assignment.new(assignment_params)
     @assignment_user=AssignmentUser.new
-    @plan = Plan.find(params[:plan_id]
+    @plan = Plan.find(params[:plan_id])
+    @plan_assignment.plan_id = @plan.id
+
+    
+
 
     respond_to do |format|
       if @assignment.save
+        @plan_assignment.assignment_id = @assignment.id
         @assignment_user.assignment_id = @assignment.id
+        @plan_assignment.save
         @assignment_user.save
         format.html { redirect_to plan_path(@plan), notice: 'Assignment was successfully created.' }
         format.json { render :show, status: :created, location: @assignment }
@@ -39,7 +46,6 @@ class AssignmentsController < ApplicationController
         format.json { render json: @assignment.errors, status: :unprocessable_entity }
       end
     end
-    
   end
 
   # PATCH/PUT /assignments/1
@@ -64,6 +70,18 @@ class AssignmentsController < ApplicationController
       format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def mark_as_complete
+    @assignment = Assignment.find(params[:assignment_id])
+    @assignment.update_attributes(is_completed: true)
+    redirect_to :back
+  end
+
+  def mark_as_incomplete
+    @assignment = Assignment.find(params[:assignment_id])
+    @assignment.update_attributes(is_completed: false)
+    redirect_to :back
   end
 
   private
