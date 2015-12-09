@@ -15,18 +15,14 @@ class User < ActiveRecord::Base
 
 
 def role?(role)
-  self.roles.pluck(:name).include?(role)
+    self.roles.pluck(:name).include?(role)
 end
 
-
-private
-
-def setup_employee_role
-  if Employee.where('email != ? AND email != ?', "raag.ices@gmail.com", "gajendra.qubik@gmail.com")
-    for employee in employees 
-      employee.roles << Role.third
-    end
+def setup_user_role
+    if user.roles.empty?
+      user.roles << Role.third
   end
 end
+
 
 end

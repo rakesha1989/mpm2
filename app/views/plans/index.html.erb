@@ -20,9 +20,9 @@
       <tr>
         <td><%= plan.name %></td>
         <td><%= plan.start_date %></td>
-        <td><%= plan.status_id %></td>
-        <td><%= plan.meeting_id %></td>
-        <td><%= plan.priority_id %></td>
+        <td><%= plan.status.name %></td>
+        <td><%= plan.meeting.plan_month.strftime("%b %Y") %></td>
+        <td><%= plan.priority.name %></td>
         <td><%= plan.rating %></td>
         <td><%= link_to 'Show', plan %></td>
         <td><%= link_to 'Edit', edit_plan_path(plan) %></td>

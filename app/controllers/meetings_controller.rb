@@ -1,15 +1,19 @@
 class MeetingsController < ApplicationController
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
-
+  before_action :find_record, only: [:edit, :update, :destroy]
+  before_filter :authenticate_user!
+  #load_and_authorize_resource
   # GET /meetings
   # GET /meetings.json
   def index
-    @meetings = Meeting.all
+    @meetings = (current_user.role? "director") ? Meeting.all : current_user.meetings
   end
 
   # GET /meetings/1
   # GET /meetings/1.json
   def show
+    @meeting = (current_user.role? "director") ? Meeting.find(params[:id]) : current_user.clients.find(params[:id])  
+  @meetings = @meeting.plans
   end
 
   # GET /meetings/new
@@ -70,5 +74,13 @@ class MeetingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
       params.require(:meeting).permit(:plan_month, :date, :company_id, :category)
+    end
+
+    def find_record
+      begin
+        @meeting = current_user.meetings.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        redirect_to root_path, notice: "Record Doesn't exist"
+      end
     end
 end

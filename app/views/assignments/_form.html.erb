@@ -27,6 +27,14 @@
     <%= f.label :category_id %><br>
     <%= f.number_field :category_id %>
   </div>
+
+  Employees<br/>
+  <% User.all.each do |user| %>
+    <%= check_box_tag "assignment[user_ids][]", user.id, @assignment.user_ids.include?(user.id), :id => dom_id(user) %>
+  <%= label_tag dom_id(user), user.email %><br/>
+
+<% end %>
+
   <div class="field">
     <%= f.label :is_completed %><br>
     <%= f.check_box :is_completed %>

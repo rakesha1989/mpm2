@@ -1,6 +1,7 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
   before_action :find_record, only: [:edit, :show, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /assignments
   # GET /assignments.json
@@ -28,6 +29,7 @@ class AssignmentsController < ApplicationController
   def create
     @assignment = Assignment.new(assignment_params)
     @plan = Plan.find(params[:plan_id])
+    @assignment.plan_id = @plan.id
     respond_to do |format|
       if @assignment.save
         format.html { redirect_to plan_path(@plan), notice: 'Assignment was successfully created.' }
@@ -88,7 +90,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignment_params
-      params.require(:assignment).permit(:name, :due_at, :activity_id, :category_id, :status, :temp)
+      params.require(:assignment).permit(:name, :due_at, :activity_id, :category_id, :status, :is_completed, user_ids: [])
     end
 
 

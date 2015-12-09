@@ -2,23 +2,10 @@
 
 <p>
   <strong>Plan month:</strong>
-  <%= @meeting.plan_month %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @meeting.date %>
-</p>
-
-<p>
-  <strong>Company:</strong>
-  <%= @meeting.company.name %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @meeting.category %>
-</p>
+  <%= @meeting.plan_month.strftime('%B %y') %> | <strong>Category:</strong>
+  <%= @meeting.category %> | <strong>Date:</strong>
+  <%= @meeting.date.strftime("%A %d %b %y %R") %> | <strong>Company:</strong>
+  <%= @meeting.company.name %> |</p>
 
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
 <%= link_to 'Back', meetings_path %>
@@ -52,7 +39,7 @@
   </div>
   <div class="field">
     <%= f.label :meeting_id %><br>
-    <%= f.collection_select :meeting_id, Meeting.all, :id, :plan_month, prompt: "Select Meeting" %>
+    <%= f.collection_select :meeting_id, Meeting.all, :id, :category, prompt: "Select Meeting" %>
   </div>
   <div class="field">
     <%= f.label :priority_id %><br>
@@ -61,6 +48,13 @@
   <div class="field">
     <%= f.label :rating %><br>
     <%= f.select :rating, %w[1 2 3 4 5]  %>
+  </div>
+  <div class="field">
+    <ul>
+      <% for user in User.all %>
+        <li><%= user.email %></li>
+      <% end %>
+    </ul>
   </div>
   <div class="actions">
     <%= f.submit %>

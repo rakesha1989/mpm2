@@ -11,17 +11,21 @@
 <%= link_to 'Edit', edit_plan_path(@plan) %> |
 <%= link_to 'Back', plans_path %>
 
-
-
 <ul>
 <% for assignment in @plan.assignments %>
   <li>
-    <%= assignment.details %>
+    <%= assignment.details %> <br/>
+    Assigned to <br/>
+    <ul>
+      <% for user in assignment.users %>
+        <li><%= user.email %></li>
+      <% end %>
+    </ul>
   </li>
   <% end %>
 </ul>
 
-<% pending_assignments = @plan.assignments.where('is_completed = ? AND due_at < ?', false, Date.today) %>
+<% pending_assignments = @plan.assignments.where('is_completed IS NULL AND due_at > ?', Date.today) %>
 <h3> Pending assignments </h3>
 <ul>
   <% for assignment in pending_assignments %>
@@ -49,7 +53,8 @@
   <% end %>
 </ul>
 
-<%= form_for([@plan, @plan.assignments.build]) do |f| %>
+<% @assignment = Assignment.new %>
+<%= form_for([@plan, @assignment]) do |f| %>
 <% assignments = @plan.assignments %>
 <h3> Total Assignments - <%= assignments.size %></h3>
 
@@ -72,6 +77,15 @@
     <%= f.label :category_id %><br>
     <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select Category" %>
   </div>
+    
+  </div>
+
+  Employees<br/>
+  <% User.all.each do |user| %>
+    <%= check_box_tag "assignment[user_ids][]", user.id, @assignment.user_ids.include?(user.id), :id => dom_id(user) %>
+  <%= label_tag dom_id(user), user.email %><br/>
+
+<% end %>
    
   <div class="field">
     <%= f.label :is_completed %><br>

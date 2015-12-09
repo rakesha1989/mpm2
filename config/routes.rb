@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
- 
+  devise_for :users
+  
   resources :plans do
     resources :assignments
   end
@@ -28,7 +29,7 @@ Rails.application.routes.draw do
   resources :companies
   resources :plan_assignments
 
-  devise_for :users
+  
   root 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

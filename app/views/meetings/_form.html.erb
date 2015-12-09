@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :plan_month %><br>
-    <%= f.date_select :plan_month %>
+    <%= f.date_select :plan_month, discard_day: true %>
   </div>
   <div class="field">
     <%= f.label :date %><br>

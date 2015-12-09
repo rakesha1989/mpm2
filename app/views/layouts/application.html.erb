@@ -9,7 +9,27 @@
 <body>
 
 <% if user_signed_in? %>
-<p> Hello, <%= current_user.email %> | <%= link_to "Company", companies_path %> |<%= link_to "Meetings", meetings_path %> | <%= link_to "Plans", plans_path %> | <%= link_to "Assignment", assignments_path %> | <%= link_to 'Home', root_path %> | <%= link_to "sign_out", destroy_user_session_path, :method => 'delete' %> | <%= link_to "Status", statuses_path %> | <%= link_to "Activity", activities_path %> | <%= link_to "Priority", priorities_path %>| <%= link_to "Category", categories_path %> |</p>	
+<p> Hello, <%= current_user.email %> | <%= link_to "Plans", plans_path %> | <%= link_to "Assignment", assignments_path %> | <%= link_to 'Home', root_path %> |
+<% if can? :create, Company.new %>
+<%= link_to "Company", companies_path %>
+<% end %> |
+<% if can? :create, Meeting.new %>
+<%= link_to "Meeting", meetings_path %>
+<% end %> |
+<% if can? :create, Status.new %>
+<%= link_to "Status", statuses_path %>
+<% end %> |
+<% if can? :create, Activity.new %>
+<%= link_to "Activity", activities_path %>
+<% end %> |
+<% if can? :create, Priority.new %>
+<%= link_to "Priority", priorities_path %>
+<% end %> |
+<% if can? :create, Category.new %>
+<%= link_to "Category", categories_path %>
+<% end %> |
+<%= link_to "sign_out", destroy_user_session_path, :method => 'delete' %> |
+</p>	
 <% end %>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>

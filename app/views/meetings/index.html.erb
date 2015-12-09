@@ -16,9 +16,9 @@
   <tbody>
     <% @meetings.each do |meeting| %>
       <tr>
-        <td><%= meeting.plan_month %></td>
-        <td><%= meeting.date %></td>
-        <td><%= meeting.company_id %></td>
+        <td><%= meeting.plan_month.strftime('%b %y') %></td>
+        <td><%= meeting.date.strftime("%A %b %y %R") %></td>
+        <td><%= meeting.company.name %></td>
         <td><%= meeting.category %></td>
         <td><%= link_to 'Show', meeting %></td>
         <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
