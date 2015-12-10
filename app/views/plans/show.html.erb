@@ -7,9 +7,11 @@
   <%= @plan.meeting.plan_month %>| <strong>Priority:</strong>
   <%= @plan.priority.name %>| <strong>Rating:</strong>
   <%= @plan.rating %>| 
+<% if can? :update, @plan %>
+<%= link_to 'Edit', edit_plan_path(@plan) %> <% end %>|
 
-<%= link_to 'Edit', edit_plan_path(@plan) %> |
 <%= link_to 'Back', plans_path %>
+
 
 <ul>
 <% for assignment in @plan.assignments %>

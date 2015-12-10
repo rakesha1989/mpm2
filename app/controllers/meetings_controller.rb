@@ -2,7 +2,7 @@ class MeetingsController < ApplicationController
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
   before_action :find_record, only: [:edit, :update, :destroy]
   before_filter :authenticate_user!
-  #load_and_authorize_resource
+  load_and_authorize_resource
   # GET /meetings
   # GET /meetings.json
   def index
@@ -12,7 +12,7 @@ class MeetingsController < ApplicationController
   # GET /meetings/1
   # GET /meetings/1.json
   def show
-    @meeting = (current_user.role? "director") ? Meeting.find(params[:id]) : current_user.clients.find(params[:id])  
+    @meeting = (current_user.role? "director") ? Meeting.find(params[:id]) : current_user.meetings.find(params[:id])  
   @meetings = @meeting.plans
   end
 

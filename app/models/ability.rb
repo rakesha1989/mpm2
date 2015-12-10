@@ -5,11 +5,12 @@ class Ability
    if user.role? "director"
         can :manage, :all
     elsif user.role? "admin"
-        can :manage, :all
+        can :read, :all
+        can :create, :all
     elsif user.role? "user"
         can :read, Meeting #index & show 
         can :read, Plan
-        can :manage, Assignment        
+        can :manage, Assignment    
     end
 
     # Define abilities for the passed in user here. For example:

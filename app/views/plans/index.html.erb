@@ -33,5 +33,6 @@
 </table>
 
 <br>
-
+<% if can? :create, Plan.new %>
 <%= link_to 'New Plan', new_plan_path %>
+<% end %>

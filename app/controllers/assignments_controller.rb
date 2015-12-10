@@ -6,13 +6,13 @@ class AssignmentsController < ApplicationController
   # GET /assignments
   # GET /assignments.json
   def index
-    @assignments = Assignment.all
+    @assignments = (current_user.role? "director") ? Assignment.all : current_user.assignments
   end
 
   # GET /assignments/1
   # GET /assignments/1.json
   def show
-    @assignment = Assignment.find(params[:id])
+    @assignment = (current_user.role? "director") ? Asssignment.find(params[:id]) : current_user.assignments.find(params[:id]) 
   end
 
   # GET /assignments/new
