@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :activity_id %><br>
-    <%= f.number_field :activity_id %>
+    <%= f.collection_select :activity_id, Activity.all, :id, :name, prompt: "Select Activity" %>
   </div>
   <div class="field">
     <%= f.label :category_id %><br>
