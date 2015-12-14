@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"> <%= notice %> </p>
 
 <h1>Listing Plans</h1>
 
@@ -36,3 +36,19 @@
 <% if can? :create, Plan.new %>
 <%= link_to 'New Plan', new_plan_path %>
 <% end %>
+
+<h2>Listing Priority wise plans</h2>
+
+<% priorities = Priority.all %>
+<ul>
+  <% for priority in priorities %>
+  <h3><%= priority.name %></h3>
+  <% plans = Plan.where('priority_id = ?', priority.id) %>
+  <ul>
+    <% for plan in plans %>
+      <li><%= link_to plan.details, plan_path(plan) %> </li>
+    <% end %>
+  </ul>
+  <% end %>
+</ul>
+

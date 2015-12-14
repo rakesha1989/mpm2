@@ -1,5 +1,6 @@
 class Status < ActiveRecord::Base
 
-		has_many :plans
+		has_many :plans, dependent: :destroy
 		
+		validates_presence_of :name
 end

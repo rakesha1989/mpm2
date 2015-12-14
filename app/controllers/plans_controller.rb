@@ -28,7 +28,7 @@ class PlansController < ApplicationController
 
     respond_to do |format|
       if @plan.save
-        format.html { redirect_to meeting_path(@plan.meeting_id), notice: 'Plan was successfully created.' }
+        format.html { redirect_to meeting_plans_path(@plan.meeting_id), notice: 'Plan was successfully created.' }
         format.json { render :show, status: :created, location: @plan }
       else
         format.html { render :new }

@@ -21,19 +21,19 @@
   </div>
   <div class="field">
     <%= f.label :status_id %><br>
-    <%= f.number_field :status_id %>
+    <%= f.collection_select :status_id, Status.all, :id, :name, prompt: "Select Status" %>
   </div>
   <div class="field">
     <%= f.label :meeting_id %><br>
-    <%= f.number_field :meeting_id %>
+    <%= f.collection_select :meeting_id, Meeting.all, :id, :plan_month, prompt: "Select plan month" %>
   </div>
   <div class="field">
     <%= f.label :priority_id %><br>
-    <%= f.number_field :priority_id %>
+    <%= f.collection_select :priority_id, Priority.all, :id, :name, prompt: "Select Priority" %>
   </div>
   <div class="field">
     <%= f.label :rating %><br>
-    <%= f.text_field :rating %>
+    <%= f.select :rating, %w[1 2 3 4 5] %>
   </div>
   <div class="actions">
     <%= f.submit %>
