@@ -69,12 +69,14 @@ class AssignmentsController < ApplicationController
 def mark_as_complete
     @assignment = Assignment.find(params[:assignment_id])
     @assignment.update_attributes(is_completed: true)
+     Notification.completed_assignment(@assignment).deliver!
     redirect_to :back
   end
 
 def mark_as_incomplete
     @assignment = Assignment.find(params[:assignment_id])
     @assignment.update_attributes(is_completed: false)
+      Notification.incomplete_assignment(@assignment).deliver!
     redirect_to :back
   end
 

@@ -1,0 +1,6 @@
+p> Dear Director/Adminstrator</p>
+<p>
+  The task <%= @assignment.name %> belonging to <%= @assignmnet.plan.name %> due on <%= @assignment.due_at.strftime("%A, %d %B %Y")%> has been completed.
+</p>
+regards,<br/>
+<%= @assignment.plan.user.email %>
