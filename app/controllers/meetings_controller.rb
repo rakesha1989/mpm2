@@ -1,6 +1,6 @@
 class MeetingsController < ApplicationController
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
-  before_action :find_record, only: [:edit, :update, ]
+  before_action :find_record, only: [:update, ]
   before_filter :authenticate_user!
   load_and_authorize_resource
   # GET /meetings

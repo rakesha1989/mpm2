@@ -10,17 +10,23 @@
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
 <%= link_to 'Back', meetings_path %>
 
+<%= data = {} %>
+<% for status in Status.all %>
+<% data ["#{status.name}"] = status.plans.count %>
+<% end %>
+<%= pie_chart(data) %>
+
 <ul>
 <% for plan in @meeting.plans %>
 	<li>
 		<%= plan.details %>
 	</li>
 	<% end %>
-</ul>
+</ul>>
 
-<%= form_for([@meeting, @meeting.plans.build]) do |f| %>
-  
-  <% plans = @meeting.plans %>
+<% @plan = Plan.new %>
+<%= form_for([@meeting, @plan]) do |f| %>
+<% plans = @meeting.plans %>
 <h3> Total plans - <%= plans.size %></h3>
 
 <h3> Add Plans </h3>

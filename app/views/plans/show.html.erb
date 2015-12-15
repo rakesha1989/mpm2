@@ -12,13 +12,18 @@
 
 <%= link_to 'Back', plans_path %>
 
-<% pending_assignments = @plan.assignments.where('is_completed IS NULL AND due_at < ?',  Date.today) %>
-<% assigned_assignments = @plan.assignments.where('is_completed = ? AND due_at >= ?', false, Date.today) %>
+<% over_due_assignments = @plan.assignments.where('is_completed = ? AND due_at < ?', false, Date.today.at_beginning_of_day) %>
+
+
+<% assigned_assignments = @plan.assignments.where('is_completed = ? AND due_at >= ?', false, Date.today.at_beginning_of_day) %>
+
+
 <% completed_assignments = @plan.assignments.where('is_completed = ?', true) %>
 
-<% data = {"completed" => completed_assignments.size, "assigned" => assigned_assignments.size, "pending" => pending_assignments.size} %>
 
-<%= pie_chart(data) %>
+<% data = {"completed" => completed_assignments.size, "assigned" => assigned_assignments.size, "over_due" => over_due_assignments.size} %>
+
+<%= column_chart(data) %>
 
 <% dates = [] %>
 <% @plan.assignments.order('due_at').each do |assignment| %>
@@ -46,16 +51,16 @@
 
 
 
-<% pending_assignments = @plan.assignments.where('is_completed IS NULL AND due_at > ?', Date.today) %>
-<h3> Pending assignments </h3>
+<% over_due_assignments = @plan.assignments.where('is_completed = ? AND due_at < ?', false, Date.today.at_beginning_of_day) %>
+<h3> Over Due assignments </h3>
 <ul>
-  <% for assignment in pending_assignments %>
+  <% for assignment in over_due_assignments %>
   <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> ago </small>
   <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %></li>
   <% end %>
 </ul>
 
-<% assigned_assignments = @plan.assignments.where('is_completed = ? AND due_at >= ?', false, Date.today) %>
+<% assigned_assignments = @plan.assignments.where('is_completed = ? AND due_at >= ?', false, Date.today.at_beginning_of_day) %>
 <h3> Assigned assignments </h3>
 <ul>
   <% for assignment in assigned_assignments %>

@@ -41,16 +41,17 @@
 <% for priority in Priority.all %>
 <% data ["#{priority.name}"] = priority.plans.count %>
 <% end %>
+<%= pie_chart(data) %>
 
 <% plans = {} %>
 <% Plan.all.each do |plan| %>
   <% plans["#{plan.name}"] = plan.assignments.size %>
   <% end %>
 
-  <%= column_chart(plans) %> 
+  <%= bar_chart(plans) %> 
 
 
-<%= pie_chart(data) %>
+
 <h2>Listing Priority wise plans</h2>
 
 <% priorities = Priority.all %>

@@ -13,6 +13,12 @@
     </tr>
   </thead>
 
+<% meetings = {} %>
+<% Meeting.all.each do |meeting| %>
+  <% meetings["#{meeting.plan_month.strftime('%b %y')}"] = meeting.plans.count %>
+  <% end %>
+  <%= column_chart(meetings) %> 
+
   <tbody>
     <% @meetings.each do |meeting| %>
       <tr>

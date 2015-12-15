@@ -35,12 +35,12 @@ def self.completed_assignments
 end
 
 def self.assigned_assignments
-	Assignment.where("is_completed = ? AND due_at >= ?", false,Date.today)
+	Assignment.where("is_completed = ? AND due_at >= ?", false, Date.today.at_beginning_of_day)
 
 end
 
-def self.pending_assignments
-	Assignment.where("due_at < ? AND is_completed = ?", Date.today - 1,false)
+def self.over_due_assignments
+	Assignment.where("due_at < ? AND is_completed = ?", Date.today.at_beginning_of_day ,false)
 end
 		private
 

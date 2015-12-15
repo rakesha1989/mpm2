@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :meeting_id %><br>
-    <%= f.collection_select :meeting_id, Meeting.all, :id, :plan_month, prompt: "Select plan month" %>
+    <%= f.collection_select :meeting_id, Meeting.all, :id, :plan_month, discard_day: true,  prompt: "Select plan month" %>
   </div>
   <div class="field">
     <%= f.label :priority_id %><br>
