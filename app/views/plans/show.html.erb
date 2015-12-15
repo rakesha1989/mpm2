@@ -31,7 +31,8 @@
 <h3> Pending assignments </h3>
 <ul>
   <% for assignment in pending_assignments %>
-  <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> ago </small></li>
+  <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> ago </small>
+  <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %></li>
   <% end %>
 </ul>
 
@@ -40,7 +41,8 @@
 <ul>
   <% for assignment in assigned_assignments %>
   <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> from now </small>
-  <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %></li>
+  <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %>
+  <%= link_to "mark as pending", assignments_mark_as_pending_path(assignment_id: assignment.id) %></li>
   <% end %>
 </ul>
 

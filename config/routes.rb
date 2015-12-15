@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get 'assignments/mark_as_complete'
   get 'assignments/mark_as_incomplete'
-
+  get 'assignments/mark_as_pending'
 
   resources :priorities
   resources :categories

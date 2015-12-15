@@ -80,8 +80,11 @@ def mark_as_incomplete
     redirect_to :back
   end
 
-def completed_assignments
-
+def mark_as_pending
+    @assignment = Assignment.find(params[:assignment_id])
+    @assignment.update_attributes(is_completed: false)
+      Notification.incomplete_assignment(@assignment).deliver!
+    redirect_to :back
 end
 
   private

@@ -1,15 +1,15 @@
 class Notification < ApplicationMailer
 
 
-def completed_assignments(aassignment)
+def completed_assignment(assignment)
 	@assignment = assignment
-    mail to: "raag.ices@gmail.com",
-    cc: "gajendra.qubik.gmail.com",
+    mail to: "raki4ever@gmail.com",
+    cc: "gajendra.qubik@gmail.com",
     subject: "#{ @assignment.name} has been completed"
 end
 
 
-def pending_assignments(asssignment)
+def incomplete_assignment(assignment)
 	 @assignment = assignment
     mail to: "gajendra.qubik@gmail.com",
     cc: "business@qubik.in",
