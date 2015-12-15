@@ -12,6 +12,23 @@
 
 <%= link_to 'Back', plans_path %>
 
+<% pending_assignments = @plan.assignments.where('is_completed IS NULL AND due_at < ?',  Date.today) %>
+<% assigned_assignments = @plan.assignments.where('is_completed = ? AND due_at >= ?', false, Date.today) %>
+<% completed_assignments = @plan.assignments.where('is_completed = ?', true) %>
+
+<% data = {"completed" => completed_assignments.size, "assigned" => assigned_assignments.size, "pending" => pending_assignments.size} %>
+
+<%= pie_chart(data) %>
+
+<% dates = [] %>
+<% @plan.assignments.order('due_at').each do |assignment| %>
+<% dates.push(["#{assignment.name}", (@plan.start_date > assignment.due_at - 1.days) ? @plan.start_date : (assignment.due_at - 1.days), assignment.due_at]) %>
+<% end %>
+
+<%= timeline dates %>
+
+
+
 
 <ul>
 <% for assignment in @plan.assignments %>
@@ -27,7 +44,9 @@
   <% end %>
 </ul>
 
-<% pending_assignments = @plan.assignments.where('is_completed IS NULL AND due_at > ?', Date.today - 1) %>
+
+
+<% pending_assignments = @plan.assignments.where('is_completed IS NULL AND due_at > ?', Date.today) %>
 <h3> Pending assignments </h3>
 <ul>
   <% for assignment in pending_assignments %>
