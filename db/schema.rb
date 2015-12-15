@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208085618) do
+ActiveRecord::Schema.define(version: 20151215071621) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "name"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20151208085618) do
 
   create_table "assignments", force: :cascade do |t|
     t.string   "name"
-    t.date     "due_at"
+    t.datetime "due_at"
     t.integer  "activity_id"
     t.integer  "category_id"
     t.boolean  "is_completed"

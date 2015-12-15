@@ -27,7 +27,7 @@
   <% end %>
 </ul>
 
-<% pending_assignments = @plan.assignments.where('is_completed IS NULL AND due_at > ?', Date.today) %>
+<% pending_assignments = @plan.assignments.where('is_completed IS NULL AND due_at > ?', Date.today - 1) %>
 <h3> Pending assignments </h3>
 <ul>
   <% for assignment in pending_assignments %>
@@ -71,7 +71,7 @@
   </div>
   <div class="field">
     <%= f.label :due_at %><br>
-    <%= f.date_select :due_at %>
+    <%= f.datetime_select :due_at %>
   </div>
   <div class="field">
     <%= f.label :activity_id %><br>

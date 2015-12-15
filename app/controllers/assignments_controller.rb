@@ -76,14 +76,13 @@ def mark_as_complete
 def mark_as_incomplete
     @assignment = Assignment.find(params[:assignment_id])
     @assignment.update_attributes(is_completed: false)
-      Notification.incomplete_assignment(@assignment).deliver!
+     Notification.incomplete_assignment(@assignment).deliver!
     redirect_to :back
   end
 
 def mark_as_pending
     @assignment = Assignment.find(params[:assignment_id])
-    @assignment.update_attributes(is_completed: false)
-      Notification.incomplete_assignment(@assignment).deliver!
+    @assignment.update_attributes(due_at: Date.today - 1)
     redirect_to :back
 end
 

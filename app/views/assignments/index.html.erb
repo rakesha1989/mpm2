@@ -19,7 +19,7 @@
       <tr>
         <td><%= assignment.activity.name %></td>
         <td><%= assignment.name %></td>
-        <td><%= assignment.due_at %></td>
+        <td><%= assignment.due_at.strftime("%b %Y %H") %></td>
         <td><%= assignment.category.name %></td>
         <td><%= assignment.is_completed %></td>
         <td><%= link_to 'Show', assignment %></td>

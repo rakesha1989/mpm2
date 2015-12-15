@@ -7,17 +7,17 @@
 
 <p>
   <strong>Due at:</strong>
-  <%= @assignment.due_at %>
+  <%= @assignment.due_at.strftime('%b %y %h') %>
 </p>
 
 <p>
   <strong>Activity:</strong>
-  <%= @assignment.activity_id %>
+  <%= @assignment.activity.name %>
 </p>
 
 <p>
   <strong>Category:</strong>
-  <%= @assignment.category_id %>
+  <%= @assignment.category.name %>
 </p>
 
 <p>
