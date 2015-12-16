@@ -24,6 +24,30 @@
 	<% end %>
 </ul>>
 
+
+<%= data = {} %>
+<% for status in Status.all %>
+<% data ["#{status.name}"] = status.plans.count %>
+<% end %>
+<%= column_chart(data) %>
+
+<h2>Listing Status wise plans</h2>
+
+<% statuses = Status.all %>
+<ul>
+  <% for status in statuses %>
+  <h3><%= status.name %></h3>
+  <% plans = Plan.where('status_id = ?', status.id) %>
+  <ul>
+    <% for plan in plans %>
+      <li><%= link_to plan.details, plan_path(plan) %> </li>
+    <% end %>
+  </ul>
+  <% end %>
+</ul>
+
+
+
 <% @plan = Plan.new %>
 <%= form_for([@meeting, @plan]) do |f| %>
 <% plans = @meeting.plans %>
