@@ -1,3 +1,14 @@
+<div class = "row">
+  <div class = "col-md-2">
+  </div>
+
+
+
+<div class = "col-md-5">
+   <div class ="page-header">
+      <h2>New Company</h2>
+  </div>
+
 <%= form_for(@company) do |f| %>
   <% if @company.errors.any? %>
     <div id="error_explanation">
@@ -13,25 +24,31 @@
 
   <div class="field">
     <%= f.label :suffix %><br>
-    <%= f.text_field :suffix %>
+    <%= f.text_field :suffix, class: "form-control", autofocus: true, placeholder: "Entere Suffix", required: true  %>
   </div>
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control", autofocus: true, placeholder: "Entere Name", required: true  %>
   </div>
   <div class="field">
     <%= f.label :sector %><br>
-    <%= f.text_field :sector %>
+    <%= f.text_field :sector, class: "form-control", autofocus: true, placeholder: "Entere Sector", required: true  %>
   </div>
   <div class="field">
     <%= f.label :cin_no %><br>
-    <%= f.text_field :cin_no %>
+    <%= f.text_field :cin_no, class: "form-control", autofocus: true, placeholder: "Entere Cin_no", required: true  %>
   </div>
   <div class="field">
     <%= f.label :pan_no %><br>
-    <%= f.text_field :pan_no %>
+    <%= f.text_field :pan_no, class: "form-control", autofocus: true, placeholder: "Entere Pan_no", required: true  %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= button_tag(type: 'submit', class: "btn btn-info") do %>
+  <i class="icon-ok icon-white"></i> create company
+  <% end %>
+  <%= link_to 'Back', companies_path %>
 <% end %>
+</div>
+
+ <div class = "col-md-5">
+  </div>
+  </div>

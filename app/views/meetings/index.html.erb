@@ -1,23 +1,97 @@
 <p id="notice"><%= notice %></p>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <h4>Calender VIEW</h4>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+
 
 <h1>Listing Meetings</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Plan month</th>
-      <th>Date</th>
-      <th>Company</th>
-      <th>Category</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<!-- full calender-->
+<script type="text/javascript">
+  $(function() {
+    $('#calendar').fullCalendar({
+      header: {
+        left:   'today,prev,next',
+        center: 'title',
+        right:  'month,agendaWeek,agendaDay'
+      },
+
+      events: [
+      <% for meeting in @meetings%>
+        <% for plan in meeting.plans %>
+          {
+            title: '<%=plan.name%>',
+            start: '<%=plan.start_date.iso8601%>',
+            url: '<%="/plans/#{plan.id}"%>'
+          },
+        <% end %>
+        <% end %>
+      ]
+     });
+
+});
+</script>
+
+<div id="calendar"></div>
+<br/>
+<button type="button" class="btn btn-info"><%= link_to "Print the Claendar" ,meetings_print_calendar_path()%></button>
+<br/>
+<br/>
+</div>
+</div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <h4>Chart View</h4>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 
 <% meetings = {} %>
 <% Meeting.all.each do |meeting| %>
   <% meetings["#{meeting.plan_month.strftime('%b %y')}"] = meeting.plans.count %>
   <% end %>
   <%= column_chart(meetings) %> 
+  <button type="button" class="btn btn-info"><%= link_to "Print the Chart" ,meetings_print_chart_path()%></button>
+<br/>
+<br/>
+</div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <h4>Table View</h4>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+<table id="myTable">
+  <thead>
+    <tr>
+      <th>Plan month</th>
+      <th>Date</th>
+      <th>Company</th>
+      <th>Category</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
 
   <tbody>
     <% @meetings.each do |meeting| %>
@@ -26,14 +100,20 @@
         <td><%= meeting.date.strftime("%A %b %y %R") %></td>
         <td><%= meeting.company.name %></td>
         <td><%= meeting.category %></td>
-        <td><%= link_to 'Show', meeting %></td>
-        <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
-        <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', meeting %>
+            <%= link_to 'Edit', edit_meeting_path(meeting) %>
+            <%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
+<br/>
+<button type="button" class="btn btn-info"><%= link_to "Print the table" ,meetings_print_table_path()%></button>
+<br/>
+<br/>
+</div>
+</div>
+</div>
+</div>
 
 <%= link_to 'New Meeting', new_meeting_path %>

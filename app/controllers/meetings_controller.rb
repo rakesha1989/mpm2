@@ -65,6 +65,17 @@ class MeetingsController < ApplicationController
     end
   end
 
+  def print_calendar
+    @meetings = (current_user.role? "director") ? Meeting.all : current_user.meetings
+  end
+
+  def print_chart
+    @meetings = (current_user.role? "director") ? Meeting.all : current_user.meetings
+  end
+  def print_table
+    @meetings = (current_user.role? "director") ? Meeting.all : current_user.meetings
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_meeting

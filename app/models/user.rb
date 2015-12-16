@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :assignments, through: :assignment_users
   belongs_to :company
   belongs_to :meeting
+  has_one :profile , dependent: :destroy
 
 
 def role?(role)

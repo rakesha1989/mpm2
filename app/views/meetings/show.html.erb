@@ -32,19 +32,31 @@
 <%= column_chart(data) %>
 
 <h2>Listing Status wise plans</h2>
-
 <% statuses = Status.all %>
-<ul>
   <% for status in statuses %>
-  <h3><%= status.name %></h3>
+  
   <% plans = Plan.where('status_id = ?', status.id) %>
-  <ul>
-    <% for plan in plans %>
-      <li><%= link_to plan.details, plan_path(plan) %> </li>
-    <% end %>
-  </ul>
-  <% end %>
-</ul>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne<%=status.name%>">
+          <h3><%= status.name %></h3>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne<%=status.name%>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+          <% for plan in plans %>
+          <%= link_to plan.details, plan_path(plan) %> 
+          <% end %>
+      </div>
+    </div>
+
+  </div>
+   <br/>
+<% end %>
+</div>
 
 
 

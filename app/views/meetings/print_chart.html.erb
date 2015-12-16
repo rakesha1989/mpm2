@@ -1,0 +1,14 @@
+<div class="container-fluid">
+<% meetings = {} %>
+<% Meeting.all.each do |meeting| %>
+  <% meetings["#{meeting.plan_month.strftime('%b %y')}"] = meeting.plans.count %>
+  <% end %>
+  <%= column_chart(meetings) %> 
+
+  <button type="button" class="btn btn-info" id="print" onclick="myFunction()">Print</button><br/><br/>
+<script type="text/javascript">
+  function myFunction(){
+    window.print()
+  }
+</script>
+</div>

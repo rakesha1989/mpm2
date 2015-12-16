@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+
+  get 'meetings/print_calendar'
+  get 'meetings/print_table'
+  get 'meetings/print_chart'
+  resources :profiles
   devise_for :users
   
   resources :plans do

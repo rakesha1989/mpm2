@@ -1,0 +1,44 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.5.0/fullcalendar.min.css">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.5.0/fullcalendar.min.js"></script>
+
+<div class="container">
+<h1>Listing Meetings</h1>
+
+<script type="text/javascript">
+  $(function() {
+    $('#calendar').fullCalendar({
+      header: {
+        left:   'today,prev,next',
+        center: 'title',
+        right:  'month,agendaWeek,agendaDay'
+      },
+
+      events: [
+      <% for meeting in @meetings%>
+        <% for plan in meeting.plans %>
+          {
+            title: '<%=plan.name%>',
+            start: '<%=plan.start_date.iso8601%>',
+            url: '<%="/plans/#{plan.id}"%>'
+          },
+        <% end %>
+        <% end %>
+      ]
+     });
+
+});
+</script>
+
+<div id="calendar"></div><br/>
+
+<button type="button" class="btn btn-info" id="print" onclick="myFunction()">Print</button><br/><br/>
+<script type="text/javascript">
+  function myFunction(){
+    window.print()
+  }
+</script>
+</div>

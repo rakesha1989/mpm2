@@ -1,0 +1,63 @@
+<div class = "row">
+  <div class = "col-md-2">
+  </div>
+
+
+
+<div class = "col-md-5">
+   <div class ="page-header">
+      <h2>New Profile</h2>
+  </div>
+
+
+
+
+<%= form_for(@profile) do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: "form-control", autofocus: true, placeholder: "Entere First Name", required: true %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name, class: "form-control", autofocus: true, placeholder: "Entere Last Name", required: true %>
+  </div>
+  <div class="field">
+    <%= f.label :d_o_b %><br>
+    <%= f.date_select :d_o_b %>
+  </div>
+  <div class="field">
+    <%= f.label :designation %><br>
+    <%= f.text_field :designation, class: "form-control", autofocus: true, placeholder: "Entere Designation", required: true %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br>
+    <%= f.text_field :gender, class: "form-control", autofocus: true, placeholder: "Entere Gender", required: true %>
+  </div>
+  <div class="field">
+    <%= f.label :skill %><br>
+    <%= f.text_field :skill, class: "form-control", autofocus: true, placeholder: "Entere Skill", required: true %>
+  </div>
+
+   <%= button_tag(type: 'submit', class: "btn btn-info") do %>
+  <i class="icon-ok icon-white"></i> create profile
+  <% end %>
+  <%= link_to 'Back', profiles_path %>
+<% end %>
+</div>
+
+
+<div class = "col-md-5">
+  </div>
+  </div>

@@ -1,3 +1,14 @@
+<div class = "row">
+  <div class = "col-md-2">
+  </div>
+
+
+
+<div class = "col-md-5">
+   <div class ="page-header">
+     <h2>New Meeting</h2>
+   </div>
+
 <%= form_for(@meeting) do |f| %>
   <% if @meeting.errors.any? %>
     <div id="error_explanation">
@@ -13,21 +24,41 @@
 
   <div class="field">
     <%= f.label :plan_month %><br>
-    <%= f.date_select :plan_month, discard_day: true %>
+    <%= f.date_select :plan_month, discard_day: true, class: "form-control", autofocus: true, placeholder: "Entere Date", required: true %>
   </div>
+
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.datetime_select :date %>
+    <%= f.datetime_select :date, class: "form-control", autofocus: true, placeholder: "Entere Date", required: true %>
   </div>
+
   <div class="field">
     <%= f.label :company_id %><br>
-    <%= f.collection_select :company_id, Company.all, :id, :name, prompt: "select Company" %>
+    <%= f.collection_select :company_id, Company.all, :id, :name, prompt: "select Company", class: "form-control", autofocus: true, placeholder: "Entere Date", required: true %>
   </div>
+
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.select :category, %w[MPM MRM] %>
+    <%= f.select :category, %w[MPM MRM], class: "form-control", autofocus: true, placeholder: "Entere Date", required: true %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+  
+
+
+<%= button_tag(type: 'submit', class: "btn btn-info") do %>
+  <i class="icon-ok icon-white"></i> create meeting
+  <% end %>
+
+  <%= link_to 'Back', meetings_path %>
+
 <% end %>
+
+</div>
+
+
+
+
+  <div class = "col-md-5">
+  </div>
+  </div>
+

@@ -1,3 +1,16 @@
+<div class = "row">
+  <div class = "col-md-2">
+  </div>
+
+
+
+<div class = "col-md-5">
+   <div class ="page-header">
+      <h2>New Plan</h2>
+  </div>
+     
+
+
 <%= form_for(@plan) do |f| %>
   <% if @plan.errors.any? %>
     <div id="error_explanation">
@@ -13,11 +26,11 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control", autofocus: true, placeholder: "Entere Name", required: true %>
   </div>
   <div class="field">
     <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
+    <%= f.date_select :start_date%>
   </div>
   <div class="field">
     <%= f.label :status_id %><br>
@@ -25,7 +38,7 @@
   </div>
   <div class="field">
     <%= f.label :meeting_id %><br>
-    <%= f.collection_select :meeting_id, Meeting.all, :id, :plan_month, discard_day: true,  prompt: "Select plan month" %>
+    <%= f.collection_select :meeting_id, Meeting.all, :id, :plan_month, discard_day: true,  prompt: "Select plan month"%>
   </div>
   <div class="field">
     <%= f.label :priority_id %><br>
@@ -35,7 +48,18 @@
     <%= f.label :rating %><br>
     <%= f.select :rating, %w[1 2 3 4 5] %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+  <%= button_tag(type: 'submit', class: "btn btn-info") do %>
+  <i class="icon-ok icon-white"></i> create plan
+  <% end %>
+  <%= link_to 'Back', plans_path %>
+
 <% end %>
+
+</div>
+
+
+
+ <div class = "col-md-5">
+  </div>
+  </div>

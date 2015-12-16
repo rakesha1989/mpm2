@@ -2,7 +2,7 @@
 
 <h1>Listing Assignments</h1>
 
-<table>
+<table id="myTable">
   <thead>
     <tr>
       <th>Activity</th>
@@ -10,7 +10,7 @@
       <th>Due at</th>
       <th>Category</th>
       <th>Is completed</th>
-      <th colspan="3"></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -22,9 +22,9 @@
         <td><%= assignment.due_at.strftime("%b %Y %H") %></td>
         <td><%= assignment.category.name %></td>
         <td><%= assignment.is_completed %></td>
-        <td><%= link_to 'Show', assignment %></td>
-        <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>
-        <td><%= link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', assignment %>
+            <%= link_to 'Edit', edit_assignment_path(assignment) %>
+            <%= link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
