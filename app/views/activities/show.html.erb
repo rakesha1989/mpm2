@@ -1,9 +1,22 @@
 <p id="notice"><%= notice %></p>
 
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Activity Details</h3>
+  </div>
+<div class="panel-body">
+
 <p>
   <strong>Name:</strong>
   <%= @activity.name %>
 </p>
 
-<%= link_to 'Edit', edit_activity_path(@activity) %> |
-<%= link_to 'Back', activities_path %>
+
+<a class="btn btn-primary" href="<%=edit_activity_path(@activity)%>" role="button" style="color:white">Edit</a>
+<a class="btn btn-primary" href="<%=activities_path%>" role="button" style="color:white">Back</a>
+
+
+
+</div>
+</div>

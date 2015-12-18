@@ -1,14 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<div class="well well-sm">
   <strong>Plan month:</strong>
   <%= @meeting.plan_month.strftime('%B %y') %> | <strong>Category:</strong>
   <%= @meeting.category %> | <strong>Date:</strong>
   <%= @meeting.date.strftime("%A %d %b %y %R") %> | <strong>Company:</strong>
-  <%= @meeting.company.name %> |</p>
+  <%= @meeting.company.name %> |
 
-<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
-<%= link_to 'Back', meetings_path %>
+<% if can? :update, @plan %>
+  <a class="btn btn-primary" href="<%=edit_meeting_path(@meeting)%>" role="button" style="color:white">Edit</a><% end %>
+  <a class="btn btn-primary" href="<%=meetings_path%>" role="button" style="color:white">Back</a>
+
+</div>
+
+
+
+
+
+<div class = "row">
+  <div class = "col-md-8">
 
 <%= data = {} %>
 <% for status in Status.all %>
@@ -16,13 +26,6 @@
 <% end %>
 <%= pie_chart(data) %>
 
-<ul>
-<% for plan in @meeting.plans %>
-	<li>
-		<%= plan.details %>
-	</li>
-	<% end %>
-</ul>>
 
 
 <%= data = {} %>
@@ -30,45 +33,29 @@
 <% data ["#{status.name}"] = status.plans.count %>
 <% end %>
 <%= column_chart(data) %>
-
-<h2>Listing Status wise plans</h2>
-<% statuses = Status.all %>
-  <% for status in statuses %>
   
-  <% plans = Plan.where('status_id = ?', status.id) %>
-  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne<%=status.name%>">
-          <h3><%= status.name %></h3>
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne<%=status.name%>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-          <% for plan in plans %>
-          <%= link_to plan.details, plan_path(plan) %> 
-          <% end %>
-      </div>
-    </div>
 
-  </div>
-   <br/>
-<% end %>
 </div>
 
+<div class = "col-md-4">
 
-
-<% @plan = Plan.new %>
+<div class="well well-sm"><% @plan = Plan.new %>
 <%= form_for([@meeting, @plan]) do |f| %>
 <% plans = @meeting.plans %>
-<h3> Total plans - <%= plans.size %></h3>
+<h3> Total plans - <%= plans.size %></h3></div>
+    
+          
 
-<h3> Add Plans </h3>
-  <div class="field">
+
+
+     <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Add Plans </h3>
+  </div>
+  <div class="panel-body">
+    <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_area :name, rows: 3, cols: 60 %>
+    <%= f.text_area :name, rows: 3, cols: 60, class: "form-control", autofocus: true, placeholder: "Entere Name", required: true %>
   </div>
   <div class="field">
     <%= f.label :start_date %><br>
@@ -98,10 +85,98 @@
       <% end %>
     </ul>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  
+
+       <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+                     <i class="icon-ok icon-white"></i> Create Plan
+      <% end %>
+
 <% end %>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+</div>
+  </div>
+
+
+
+
+<div class = "row">
+  <div class = "col-md-6">
+      <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Plan</h3>
+  </div>
+  <div class="panel-body">
+    
+
+          <ul>
+          <% for plan in @meeting.plans %>
+          	<li>
+          		<%= plan.details %>
+          	</li>
+          	<% end %>
+          </ul>>
+  </div>
+  </div>
+  </div>
+
+   <div class = "col-md-6">
+
+         <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title">Listing Status wise plans</h1>
+  </div>
+  <div class="panel-body">
+
+          
+          <% statuses = Status.all %>
+            <% for status in statuses %>
+            
+          <% plans = Plan.where('status_id = ?', status.id) %>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-info">
+            <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne<%=status.id%>" aria-expanded="true" aria-controls="collapseOne<%=status.id%>">
+          <h5><%=status.name%></h5>
+            </a>
+          </h4>
+            </div>
+            <div id="collapseOne<%=status.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                    <% for plan in plans %>
+                    <%= link_to plan.details, plan_path(plan) %> 
+                    <% end %>
+            </div>
+            </div>
+
+            </div>
+             <br/>
+          <% end %>
+            </div>
+            </div>
+            </div>
+
+
+
+
+   </div>
+
+</div>
+
+
+
+
+
+
 
 
 

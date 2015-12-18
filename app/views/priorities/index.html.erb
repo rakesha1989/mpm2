@@ -2,7 +2,7 @@
 
 <h1>Listing Priorities</h1>
 
-<table id="myTable">
+<table class="table table-bordered", id="myTable">
   <thead>
     <tr>
       <th>Name</th>
@@ -14,16 +14,21 @@
     <% @priorities.each do |priority| %>
       <tr>
         <td><%= priority.name %></td>
-        <td><%= link_to 'Show', priority %>
-            <%= link_to 'Edit', edit_priority_path(priority) %>
-            <%= link_to 'Destroy', priority, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to priority do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
+            <%= link_to edit_priority_path(priority) do %><span class= "glyphicon glyphicon-pencil"></span>
+                            <% end %>|
+            <%= link_to priority, method: :delete, data: { confirm: 'Are you sure?' } do %><span class= "glyphicon glyphicon-trash"></span><% end %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Priority', new_priority_path %>
+            
+            
+
+<br>
+<%= button_to "New Priority", new_priority_path , :class => "btn btn-primary", :method => :get %>
+
 
 

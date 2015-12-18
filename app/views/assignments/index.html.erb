@@ -2,7 +2,7 @@
 
 <h1>Listing Assignments</h1>
 
-<table id="myTable">
+<table class="table table-bordered", id="myTable">
   <thead>
     <tr>
       <th>Activity</th>
@@ -22,15 +22,21 @@
         <td><%= assignment.due_at.strftime("%b %Y %H") %></td>
         <td><%= assignment.category.name %></td>
         <td><%= assignment.is_completed %></td>
-        <td><%= link_to 'Show', assignment %>
-            <%= link_to 'Edit', edit_assignment_path(assignment) %>
-            <%= link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to assignment do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
+            <%= link_to edit_assignment_path(assignment) do %><span class= "glyphicon glyphicon-pencil"></span>
+                            <% end %>|
+            <%= link_to assignment, method: :delete, data: { confirm: 'Are you sure?' } do %><span class= "glyphicon glyphicon-trash"></span><% end %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+
+            
+            
+
 <br>
 <% if can? :create, @assignment %>
-<%= link_to 'New Assignment', new_assignment_path %>
+<%= button_to "New Assignment", new_assignment_path, :class => "btn btn-primary", :method => :get %>
+
 <% end %>

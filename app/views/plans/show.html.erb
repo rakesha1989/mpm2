@@ -1,126 +1,234 @@
 <p id="notice"><%= notice %></p>
 
-  <strong>Name:</strong>
-  <%= @plan.name %> |  <strong>Start date:</strong>
-  <%= @plan.start_date %>|   <strong>Status:</strong>
-  <%= @plan.status.name %>|   <strong>Meeting:</strong>
-  <%= @plan.meeting.plan_month %>| <strong>Priority:</strong>
-  <%= @plan.priority.name %>| <strong>Rating:</strong>
-  <%= @plan.rating %>| 
-<% if can? :update, @plan %>
-<%= link_to 'Edit', edit_plan_path(@plan) %> <% end %>|
 
-<%= link_to 'Back', plans_path %>
+<div class="well well-sm" > <strong>Name :</strong>
+            <%= @plan.name %> |  <strong>Start date :</strong>
+            <%= @plan.start_date %>|   <strong>Status :</strong>
+            <%= @plan.status.name %>|   <strong>Meeting :</strong>
+            <%= @plan.meeting.plan_month %>| <strong>Priority :</strong>
+            <%= @plan.priority.name %>| <strong>Rating :</strong>
+            <%= @plan.rating %>
+  <% if can? :update, @plan %>
+  <a class="btn btn-primary" href="<%=edit_plan_path(@plan)%>" role="button" style="color:white">Edit</a><% end %>
+  <a class="btn btn-primary" href="<%=plans_path%>" role="button" style="color:white">Back</a>
 
-<% over_due_assignments = @plan.assignments.where('is_completed = ? AND due_at < ?', false, Date.today.at_beginning_of_day) %>
+</div>
 
-
-<% assigned_assignments = @plan.assignments.where('is_completed = ? AND due_at >= ?', false, Date.today.at_beginning_of_day) %>
-
-
-<% completed_assignments = @plan.assignments.where('is_completed = ?', true) %>
-
-
-<% data = {"completed" => completed_assignments.size, "assigned" => assigned_assignments.size, "over_due" => over_due_assignments.size} %>
-
-<%= column_chart(data) %>
-
-<% dates = [] %>
-<% @plan.assignments.order('due_at').each do |assignment| %>
-<% dates.push(["#{assignment.name}", (@plan.start_date > assignment.due_at - 1.days) ? @plan.start_date : (assignment.due_at - 1.days), assignment.due_at]) %>
-<% end %>
-
-<%= timeline dates %>
+           
+          
 
 
 
+<div class = "row">
+  <div class = "col-md-8">
 
-<ul>
-<% for assignment in @plan.assignments %>
-  <li>
-    <%= assignment.details %> <br/>
-    Assigned to <br/>
-    <ul>
-      <% for user in assignment.users %>
-        <li><%= user.email %></li>
+
+      <% over_due_assignments = @plan.assignments.where('is_completed = ? AND due_at < ?', false, Date.today.at_beginning_of_day) %>
+
+
+      <% assigned_assignments = @plan.assignments.where('is_completed = ? AND due_at >= ?', false, Date.today.at_beginning_of_day) %>
+
+
+      <% completed_assignments = @plan.assignments.where('is_completed = ?', true) %>
+
+
+      <% data = {"completed" => completed_assignments.size, "assigned" => assigned_assignments.size, "over_due" => over_due_assignments.size} %>
+
+      <%= column_chart(data) %>
+
+      <% dates = [] %>
+      <% @plan.assignments.order('due_at').each do |assignment| %>
+      <% dates.push(["#{assignment.name}", (@plan.start_date > assignment.due_at - 1.days) ? @plan.start_date : (assignment.due_at - 1.days), assignment.due_at]) %>
       <% end %>
-    </ul>
-  </li>
-  <% end %>
-</ul>
+
+      <%= timeline dates %>
+
+
+  </div>
+
+  <div class = "col-md-4">
+
+<div class="well well-sm"><% @assignment = Assignment.new %>
+                  <%= form_for([@plan, @assignment]) do |f| %>
+                  <% assignments = @plan.assignments %>
+                  <h3> Total Assignments - <%= assignments.size %></h3></div>
+
+                  
+
+
+
+                  <div class="panel panel-primary">
+                 <div class="panel-heading">
+                 <h3 class="panel-title">Add Assignments </h3>
+                 </div>
+                 <div class="panel-body">
+                       <div class="field">
+                      <%= f.label :name %><br>
+                      <%= f.text_field :name, class: "form-control", autofocus: true, placeholder: "Entere Name", required: true  %>
+                    </div>
+                    <div class="field">
+                      <%= f.label :due_at %><br>
+                      <%= f.datetime_select :due_at %>
+                    </div>
+                    <div class="field">
+                      <%= f.label :activity_id %><br>
+                      <%= f.collection_select :activity_id, Activity.all, :id, :name, prompt: "Select Activity" %>
+                    </div>
+                    <div class="field">
+                      <%= f.label :category_id %><br>
+                      <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select Category" %>
+                    </div>
+                      
+                   
+
+
+                    Employees<br/>
+                    <% User.all.each do |user| %>
+                      <%= check_box_tag "assignment[user_ids][]", user.id, @assignment.user_ids.include?(user.id), :id => dom_id(user) %>
+                    <%= label_tag dom_id(user), user.email %><br/>
+
+                  <% end %>
+                     
+                    <div class="field">
+                      <%= f.label :is_completed %><br>
+                      <%= f.check_box :is_completed %>
+                    </div>
+                    
+
+                    <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+                     <i class="icon-ok icon-white"></i> Create Assignment
+                    <% end %>
+
+                    <% end %>
+
+                 </div>
+                 </div>
+
+
+
+
+              
+
+
+                    
+           </div>
+
+
+  </div>
+</div>
+
+
+<div class="container">
+<div class = "row">
+  <div class = "col-md-6">
+
+  <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Activity </h3>
+  </div>
+  <div class="panel-body">
+
+          <ul>
+           <% for assignment in @plan.assignments %>
+           <li>
+             <%= assignment.details %> <br/>
+             Assigned to <br/>
+           <ul>
+           <% for user in assignment.users %>
+           <li><%= user.email %></li>
+           <% end %>
+           </ul>
+           </li>
+          <% end %>
+          </ul>
+ 
 
 
 
 <% over_due_assignments = @plan.assignments.where('is_completed = ? AND due_at < ?', false, Date.today.at_beginning_of_day) %>
-<h3> Over Due assignments </h3>
-<ul>
-  <% for assignment in over_due_assignments %>
-  <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> ago </small>
-  <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %></li>
-  <% end %>
-</ul>
+</div>
+</div>
 
-<% assigned_assignments = @plan.assignments.where('is_completed = ? AND due_at >= ?', false, Date.today.at_beginning_of_day) %>
-<h3> Assigned assignments </h3>
-<ul>
-  <% for assignment in assigned_assignments %>
-  <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> from now </small>
-  <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %>
-  <%= link_to "mark as pending", assignments_mark_as_pending_path(assignment_id: assignment.id) %></li>
-  <% end %>
-</ul>
+  </div>
+
+  <div class = "col-md-6">
+
+    <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Over Due assignments </h3>
+  </div>
+  <div class="panel-body">
+
+      <ul>
+         <% for assignment in over_due_assignments %>
+         <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> ago </small>
+         <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %></li>
+         <% end %>
+      </ul>
+
+      <% assigned_assignments = @plan.assignments.where('is_completed = ? AND due_at >= ?', false, Date.today.at_beginning_of_day) %>
+
+
+  </div>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Assigned assignments </h3>
+  </div>
+  <div class="panel-body">
+
+       <ul>
+         <% for assignment in assigned_assignments %>
+         <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> from now </small>
+         <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %>
+         <%= link_to "mark as pending", assignments_mark_as_pending_path(assignment_id: assignment.id) %></li>
+         <% end %>
+       </ul>
 
 <% completed_assignments = @plan.assignments.where('is_completed = ?', true) %>
-<h3> Completed Assignments </h3>
-<ul>
-  <% for assignment in completed_assignments %>
-  <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.updated_at) %> 
-  <%= assignment.updated_at < Time.now ? "ago" : "from now" %>
-   </small>
-   <%= link_to "mark as incomplete", assignments_mark_as_incomplete_path(assignment_id: assignment.id) %></li>
-  <% end %>
-</ul>
 
-<% @assignment = Assignment.new %>
-<%= form_for([@plan, @assignment]) do |f| %>
-<% assignments = @plan.assignments %>
-<h3> Total Assignments - <%= assignments.size %></h3>
-
-<h3> Add Assignments </h3>
+   </div>
+</div>
 
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :due_at %><br>
-    <%= f.datetime_select :due_at %>
-  </div>
-  <div class="field">
-    <%= f.label :activity_id %><br>
-    <%= f.collection_select :activity_id, Activity.all, :id, :name, prompt: "Select Activity" %>
-  </div>
-  <div class="field">
-    <%= f.label :category_id %><br>
-    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select Category" %>
-  </div>
-    
-  </div>
 
-  Employees<br/>
-  <% User.all.each do |user| %>
-    <%= check_box_tag "assignment[user_ids][]", user.id, @assignment.user_ids.include?(user.id), :id => dom_id(user) %>
-  <%= label_tag dom_id(user), user.email %><br/>
 
-<% end %>
-   
-  <div class="field">
-    <%= f.label :is_completed %><br>
-    <%= f.check_box :is_completed %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Completed Assignments </h3>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="panel-body">
+
+     <ul>
+       <% for assignment in completed_assignments %>
+       <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.updated_at) %> 
+       <%= assignment.updated_at < Time.now ? "ago" : "from now" %>
+       </small>
+       <%= link_to "mark as incomplete", assignments_mark_as_incomplete_path(assignment_id: assignment.id) %></li>
+       <% end %>
+     </ul>
+ </div>
+</div>
+
   </div>
-<% end %>
+</div>
+</div>
+
+
+
+  
+
+
+
+
+
+ 
+
+
+
+
+
+
 

@@ -2,7 +2,7 @@
 
 <h1>Listing Activities</h1>
 
-<table id="myTable"> 
+<table class="table table-bordered", id="myTable"> 
   <thead>
     <tr>
       <th>Name</th>
@@ -14,14 +14,20 @@
     <% @activities.each do |activity| %>
       <tr>
         <td><%= activity.name %></td>
-        <td><%= link_to 'Show', activity %>
-            <%= link_to 'Edit', edit_activity_path(activity) %>
-            <%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to activity do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
+            <%= link_to edit_activity_path(activity) do %><span class= "glyphicon glyphicon-pencil"></span>
+                            <% end %>|
+            <%= link_to activity, method: :delete, data: { confirm: 'Are you sure?' } do %><span class= "glyphicon glyphicon-trash"></span><% end %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Activity', new_activity_path %>
+
+            
+            
+
+<br>
+<%= button_to "New Activity", new_activity_path , :class => "btn btn-primary", :method => :get %>
+

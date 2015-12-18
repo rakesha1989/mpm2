@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+    @profiles = (current_user.role? "director") ? Profile.all : current_user.profile 
   end
 
   # GET /profiles/1
@@ -69,6 +69,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:first_name, :last_name, :d_o_b, :designation, :gender, :skill)
+      params.require(:profile).permit(:first_name, :last_name, :d_o_b, :designation, :gender, :skill, :email, :mobile)
     end
 end

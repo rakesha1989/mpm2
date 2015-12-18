@@ -1,5 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Profile Details</h3>
+  </div>
+<div class="panel-body">
+
 <p>
   <strong>First name:</strong>
   <%= @profile.first_name %>
@@ -30,5 +37,19 @@
   <%= @profile.skill %>
 </p>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+<p>
+  <strong>Email:</strong>
+  <%= @profile.email %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @profile.mobile %>
+</p>
+
+<a class="btn btn-primary" href="<%=edit_profile_path(@profile)%>" role="button" style="color:white">Edit</a>
+<a class="btn btn-primary" href="<%=profiles_path%>" role="button" style="color:white">Back</a>
+
+
+</div>
+</div>

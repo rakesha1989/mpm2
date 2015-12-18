@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
+  <div class="panel panel-info">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -49,7 +49,7 @@
 </div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-info">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -57,7 +57,7 @@
         </a>
       </h4>
     </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 
 <% meetings = {} %>
 <% Meeting.all.each do |meeting| %>
@@ -71,7 +71,7 @@
 </div>
 
 
-<div class="panel panel-default">
+<div class="panel panel-info">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -81,7 +81,7 @@
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
       <div class="panel-body">
-<table id="myTable">
+<table class="table table-bordered", id="myTable">
   <thead>
     <tr>
       <th>Plan month</th>
@@ -100,9 +100,10 @@
         <td><%= meeting.date.strftime("%A %b %y %R") %></td>
         <td><%= meeting.company.name %></td>
         <td><%= meeting.category %></td>
-        <td><%= link_to 'Show', meeting %>
-            <%= link_to 'Edit', edit_meeting_path(meeting) %>
-            <%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to meeting do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
+            <%= link_to edit_meeting_path(meeting) do %><span class= "glyphicon glyphicon-pencil"></span>
+                            <% end %>|
+           <%= link_to meeting, method: :delete, data: { confirm: 'Are you sure?' } do %><span class= "glyphicon glyphicon-trash"></span><% end %></td>
       </tr>
     <% end %>
   </tbody>
@@ -115,5 +116,5 @@
 </div>
 </div>
 </div>
+<%= button_to "New Meeting", new_meeting_path , :class => "btn btn-primary", :method => :get %>
 
-<%= link_to 'New Meeting', new_meeting_path %>

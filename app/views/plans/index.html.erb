@@ -1,71 +1,122 @@
 <p id="notice"> <%= notice %> </p>
 
-<h1>Listing Plans</h1>
+
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <h4>Table VIEW</h4>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+
+
+                <h1>Listing Plans</h1>
 
 
 
-<table id="myTable">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Start date</th>
-      <th>Status</th>
-      <th>Meeting</th>
-      <th>Priority</th>
-      <th>Rating</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
+                <table class="table table-bordered", id="myTable">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Start date</th>
+                      <th>Status</th>
+                      <th>Meeting</th>
+                      <th>Priority</th>
+                      <th>Rating</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
 
-  <tbody>
-    <% @plans.each do |plan| %>
-      <tr>
-        <td><%= plan.name %></td>
-        <td><%= plan.start_date %></td>
-        <td><%= plan.status.name %></td>
-        <td><%= plan.meeting.plan_month.strftime("%b %Y") %></td>
-        <td><%= plan.priority.name %></td>
-        <td><%= plan.rating %></td>
-        <td><%= link_to 'Show', plan %>
-            <%= link_to 'Edit', edit_plan_path(plan) %>
-            <%= link_to 'Destroy', plan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                  <tbody>
+                    <% @plans.each do |plan| %>
+                      <tr>
+                        <td><%= plan.name %></td>
+                        <td><%= plan.start_date %></td>
+                        <td><%= plan.status.name %></td>
+                        <td><%= plan.meeting.plan_month.strftime("%b %Y") %></td>
+                        <td><%= plan.priority.name %></td>
+                        <td><%= plan.rating %></td>
+                        <td><%= link_to plan do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
+                            <%= link_to edit_plan_path(plan) do %><span class= "glyphicon glyphicon-pencil"></span>
+                            <% end %>|
+                            <%= link_to plan, method: :delete, data: { confirm: 'Are you sure?' } do %><span class= "glyphicon glyphicon-trash"></span><% end %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
 
-<br>
-<% if can? :create, Plan.new %>
-<%= link_to 'New Plan', new_plan_path %>
-<% end %>
+                <br>
+                <% if can? :create, Plan.new %>
+                <%= button_to "New Plan", new_plan_path, :class => "btn btn-primary", :method => :get %>
+                
+                <% end %>
 
-<%= data = {} %>
-<% for priority in Priority.all %>
-<% data ["#{priority.name}"] = priority.plans.count %>
-<% end %>
-<%= pie_chart(data) %>
-
-<% plans = {} %>
-<% Plan.all.each do |plan| %>
-  <% plans["#{plan.name}"] = plan.assignments.size %>
-  <% end %>
-
-  <%= bar_chart(plans) %> 
+</div>
+</div>
+</div>
+</div>
 
 
+<div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <h4>Chart View</h4>
+        </a>
+      </h4>
+    </div>
+<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 
-<h2>Listing Priority wise plans</h2>
 
-<% priorities = Priority.all %>
-<ul>
-  <% for priority in priorities %>
-  <h3><%= priority.name %></h3>
-  <% plans = Plan.where('priority_id = ?', priority.id) %>
-  <ul>
-    <% for plan in plans %>
-      <li><%= link_to plan.details, plan_path(plan) %> </li>
-    <% end %>
-  </ul>
-  <% end %>
-</ul>
+                    <%= data = {} %>
+                    <% for priority in Priority.all %>
+                    <% data ["#{priority.name}"] = priority.plans.count %>
+                    <% end %>
+                    <%= pie_chart(data) %>
+
+                    <% plans = {} %>
+                    <% Plan.all.each do |plan| %>
+                      <% plans["#{plan.name}"] = plan.assignments.size %>
+                      <% end %>
+
+                    <%= bar_chart(plans) %> 
+
+</div>
+</div>
+
+
+ <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <h4>Listing Priority wise plans</h4>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+
+
+                  <h2>Listing Priority wise plans</h2>
+
+                  <% priorities = Priority.all %>
+                  <ul>
+                    <% for priority in priorities %>
+                    <h3><%= priority.name %></h3>
+                    <% plans = Plan.where('priority_id = ?', priority.id) %>
+                    <ul>
+                      <% for plan in plans %>
+                        <li><%= link_to plan.details, plan_path(plan) %> </li>
+                      <% end %>
+                    </ul>
+                    <% end %>
+                  </ul>
+</div>
+</div>
+</div>
 

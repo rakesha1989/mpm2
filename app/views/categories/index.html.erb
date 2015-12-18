@@ -2,7 +2,7 @@
 
 <h1>Listing Categories</h1>
 
-<table id ="myTable">
+<table class="table table-bordered", id ="myTable">
   <thead>
     <tr>
       <th>Name</th>
@@ -14,14 +14,15 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.name %></td>
-        <td><%= link_to 'Show', category %>
-            <%= link_to 'Edit', edit_category_path(category) %>
-            <%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to category do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
+            <%= link_to edit_category_path(category) do %><span class= "glyphicon glyphicon-pencil"></span>
+                            <% end %>|
+            <%= link_to category, method: :delete, data: { confirm: 'Are you sure?' } do %><span class= "glyphicon glyphicon-trash"></span><% end %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+<%= button_to "New Category", new_category_path , :class => "btn btn-primary", :method => :get %>
 
-<%= link_to 'New Category', new_category_path %>

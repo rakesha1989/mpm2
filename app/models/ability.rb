@@ -9,8 +9,8 @@ class Ability
         can :create, :all
     elsif user.role? "user"
         can :read, Meeting #index & show 
-        can :read, Plan
-        can :manage, Assignment    
+        can :manage, Plan
+        can :read, Assignment    
     end
 
     # Define abilities for the passed in user here. For example:

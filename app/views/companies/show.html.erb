@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Company Details</h3>
+  </div>
+<div class="panel-body">
+
 <p>
   <strong>Suffix:</strong>
   <%= @company.suffix %>
@@ -24,6 +30,10 @@
   <strong>Pan no:</strong>
   <%= @company.pan_no %>
 </p>
+<a class="btn btn-primary" href="<%=edit_company_path(@company)%>" role="button" style="color:white">Edit</a>
+<a class="btn btn-primary" href="<%=companies_path%>" role="button" style="color:white">Back</a>
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+</div>
+</div>
+
+

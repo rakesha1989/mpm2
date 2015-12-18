@@ -1,11 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @assignment.name %>
-</p>
 
-<p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= @assignment.name %></h3>
+  </div>
+  <div class="panel-body">
+    <p>
   <strong>Due at:</strong>
   <%= @assignment.due_at.strftime('%b %y %h') %>
 </p>
@@ -25,5 +26,12 @@
   <%= @assignment.is_completed %>
 </p>
 
-<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
-<%= link_to 'Back', assignments_path %>
+<a class="btn btn-primary" href="<%=edit_assignment_path(@assignment)%>" role="button" style="color:white">Edit</a>
+<a class="btn btn-primary" href="<%=assignments_path%>" role="button" style="color:white">Back</a>
+
+
+  </div>
+</div>
+
+
+

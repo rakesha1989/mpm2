@@ -27,30 +27,37 @@
 
   <div class="field">
     <%= f.label :first_name %>
-    <%= f.text_field :first_name, class: "form-control", autofocus: true, placeholder: "Entere First Name", required: true %>
+    <%= f.text_field :first_name, class: "form-control", autofocus: true, placeholder: "Enter First Name", required: true %>
   </div>
   <div class="field">
     <%= f.label :last_name %><br>
-    <%= f.text_field :last_name, class: "form-control", autofocus: true, placeholder: "Entere Last Name", required: true %>
+    <%= f.text_field :last_name, class: "form-control", autofocus: true, placeholder: "Enter Last Name", required: true %>
   </div>
   <div class="field">
     <%= f.label :d_o_b %><br>
-    <%= f.date_select :d_o_b %>
+    <%= f.date_select :d_o_b, start_year: 1980 %>
   </div>
   <div class="field">
     <%= f.label :designation %><br>
-    <%= f.text_field :designation, class: "form-control", autofocus: true, placeholder: "Entere Designation", required: true %>
+    <%= f.text_field :designation, class: "form-control", autofocus: true, placeholder: "Enter Designation", required: true %>
   </div>
   <div class="field">
     <%= f.label :gender %><br>
-    <%= f.text_field :gender, class: "form-control", autofocus: true, placeholder: "Entere Gender", required: true %>
+    <%= f.text_field :gender, class: "form-control", autofocus: true, placeholder: "Enter Gender", required: true %>
   </div>
   <div class="field">
     <%= f.label :skill %><br>
-    <%= f.text_field :skill, class: "form-control", autofocus: true, placeholder: "Entere Skill", required: true %>
+    <%= f.text_field :skill, class: "form-control", autofocus: true, placeholder: "Enter Skill", required: true %>
   </div>
-
-   <%= button_tag(type: 'submit', class: "btn btn-info") do %>
+   <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email, class: "form-control", autofocus: true, placeholder: "Enter Email", required: true %>
+  </div>
+   <div class="field">
+    <%= f.label :mobile %><br>
+    <%= f.text_field :mobile, class: "form-control", autofocus: true, placeholder: "Enter Mobile number", required: true %>
+  </div>
+   <%= button_tag(type: 'submit', class: "btn btn-success") do %>
   <i class="icon-ok icon-white"></i> create profile
   <% end %>
   <%= link_to 'Back', profiles_path %>

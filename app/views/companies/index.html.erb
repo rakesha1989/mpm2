@@ -2,7 +2,7 @@
 
 <h1>Listing Companies</h1>
 
-<table id="myTable">
+<table class="table table-bordered", id="myTable">
   <thead>
     <tr>
       <th>Suffix</th>
@@ -22,14 +22,20 @@
         <td><%= company.sector %></td>
         <td><%= company.cin_no %></td>
         <td><%= company.pan_no %></td>
-        <td><%= link_to 'Show', company %>
-            <%= link_to 'Edit', edit_company_path(company) %>
-            <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to company do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
+            <%= link_to edit_company_path(company) do %><span class= "glyphicon glyphicon-pencil"></span>
+                            <% end %>|
+             <%= link_to company, method: :delete, data: { confirm: 'Are you sure?' } do %><span class= "glyphicon glyphicon-trash"></span><% end %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Company', new_company_path %>
+
+            
+          
+
+<br>
+<%= button_to "New Company", new_company_path , :class => "btn btn-primary", :method => :get %>
+
