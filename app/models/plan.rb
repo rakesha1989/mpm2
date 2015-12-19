@@ -18,7 +18,7 @@ class Plan < ActiveRecord::Base
 	
 
 def details
-	"#{meeting.plan_month.strftime("%B %y")} - #{name} - #{start_date} - Rating #{rating}"
+	"#{meeting.plan_month.strftime("%B %y")} - #{name} - #{start_date.strftime("%B %y")} - Rating #{rating}"
 end
 
 def list

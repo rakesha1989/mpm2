@@ -111,7 +111,7 @@
                     <% plans = Plan.where('priority_id = ?', priority.id) %>
                     <ul>
                       <% for plan in plans %>
-                        <li><%= link_to plan.details, plan_path(plan) %> </li>
+                        <li class="details"><%= link_to plan.details, plan_path(plan) %> </li>
                       <% end %>
                     </ul>
                     <% end %>

@@ -10,7 +10,8 @@ class Ability
     elsif user.role? "user"
         can :read, Meeting #index & show 
         can :manage, Plan
-        can :read, Assignment    
+        can :manage, Assignment 
+        can :manage , Profile   
     end
 
     # Define abilities for the passed in user here. For example:

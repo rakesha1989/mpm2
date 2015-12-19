@@ -84,9 +84,16 @@
 
                     Employees<br/>
                     <% User.all.each do |user| %>
-                      <%= check_box_tag "assignment[user_ids][]", user.id, @assignment.user_ids.include?(user.id), :id => dom_id(user) %>
-                    <%= label_tag dom_id(user), user.email %><br/>
+                      <%if !user.role? "director"%>
 
+                      <%= check_box_tag "assignment[user_ids][]", user.id, @assignment.user_ids.include?(user.id), :id => dom_id(user) %>
+                    <%if current_user.email == user.email%>
+
+                      <%= label_tag dom_id(user), "Myself"%><br/>
+                    <%else%>
+                      <%= label_tag dom_id(user), user.email%><br/>
+                    <%end%>
+                      <%end%>
                   <% end %>
                      
                     <div class="field">
@@ -128,19 +135,27 @@
   </div>
   <div class="panel-body">
 
-          <ul>
+          
            <% for assignment in @plan.assignments %>
-           <li>
-             <%= assignment.details %> <br/>
-             Assigned to <br/>
-           <ul>
+           
+           <div class="panel panel-default">
+              <div class="panel-heading">
+                 Assigned to <br/>
+           
            <% for user in assignment.users %>
-           <li><%= user.email %></li>
+           <%= user.email %>
            <% end %>
-           </ul>
-           </li>
+           
+           </div>
+                <div class="panel-body">
+                  <%= assignment.details %> <br/>
+                </div>
+            </div>
+             
+          
+           
           <% end %>
-          </ul>
+          
  
 
 
@@ -159,12 +174,17 @@
   </div>
   <div class="panel-body">
 
-      <ul>
+      
          <% for assignment in over_due_assignments %>
-         <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> ago </small>
-         <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %></li>
+         <div class="panel panel-default">
+            <div class="panel-body">
+
+         <%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> ago </small>
+         <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %>
+         </div>
+         </div>
          <% end %>
-      </ul>
+      
 
       <% assigned_assignments = @plan.assignments.where('is_completed = ? AND due_at >= ?', false, Date.today.at_beginning_of_day) %>
 
@@ -179,13 +199,17 @@
   </div>
   <div class="panel-body">
 
-       <ul>
+       
          <% for assignment in assigned_assignments %>
-         <li><%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> from now </small>
+         <div class="panel panel-default">
+            <div class="panel-body">
+         <%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> from now </small>
          <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %>
-         <%= link_to "mark as pending", assignments_mark_as_pending_path(assignment_id: assignment.id) %></li>
+         <%= link_to "mark as pending", assignments_mark_as_pending_path(assignment_id: assignment.id) %>
+         </div>
+         </div>
          <% end %>
-       </ul>
+       
 
 <% completed_assignments = @plan.assignments.where('is_completed = ?', true) %>
 

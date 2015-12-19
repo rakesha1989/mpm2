@@ -11,7 +11,7 @@ class Assignment < ActiveRecord::Base
 
 
 def details
-	" Activity-#{activity.name}-#{name} - #{due_at} "
+	" Activity-#{activity.name}-#{name} - #{due_at.strftime("%b %Y %R %p")} "
 end
 
 

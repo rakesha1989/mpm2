@@ -26,6 +26,9 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
 
+    if current_user.role? "user"
+      @profile.user_id=current_user.id
+    end
     respond_to do |format|
       if @profile.save
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
