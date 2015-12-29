@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
+  after_save :setup_user_role
 
   has_many :permissions
   has_many :roles, through: :permissions
@@ -20,10 +21,9 @@ def role?(role)
 end
 
 def setup_user_role
-    if user.roles.empty?
-      user.roles << Role.third
+    user=User.last
+     user.roles << Role.third
   end
-end
 
 
 end

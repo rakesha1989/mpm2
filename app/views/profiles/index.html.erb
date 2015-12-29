@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Profiles</h1>
-<% if current_user.role? "director" %>
+<%if(@profile == nil)%>
+  <h3>No Profile</h3>
+      <%= button_to "New Profile", new_profile_path, :class => "btn btn-primary", :method => :get %>
+<%else%>
+    <% if current_user.role? "director" %>
+    <h1>Listing Profiles</h1>
 <table class="table table-bordered", id="myTable">
   <thead>
     <tr>
@@ -37,22 +41,60 @@
   </tbody>
 </table>
 <%else%>
-    <%if(@profiles != nil)%>
-      <h3>First name</h3><%= @profiles.first_name %>
-      <h3>Last name</h3> <%= @profiles.last_name %>
-      <h3>D o b</h3><%= @profiles.d_o_b %>
-      <h3>Designation</h3><%= @profiles.designation %>
-      <h3>Gender</h3><%= @profiles.gender %>
-      <h3>mobile</h3><%= @profiles.mobile %>
-      <h3>email</h3><%= @profiles.email %>  
-      <h3>Skill</h3><%= @profiles.skill %>
-      <%= link_to @profiles do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
-            <%= link_to edit_profile_path(@profiles) do %><span class= "glyphicon glyphicon-pencil"></span>
-                            <% end %>
-    <%else%>
-      <h3>No Profile</h3>
-      <%= button_to "New Profile", new_profile_path, :class => "btn btn-primary", :method => :get %>
-    <%end%>
+     <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Profile Details</h3>
+  </div>
+<div class="panel-body">
+
+<p>
+  <strong>First name:</strong>
+  <%= @profile.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @profile.last_name %>
+</p>
+
+<p>
+  <strong>D o b:</strong>
+  <%= @profile.d_o_b %>
+</p>
+
+<p>
+  <strong>Designation:</strong>
+  <%= @profile.designation %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @profile.gender %>
+</p>
+
+<p>
+  <strong>Skill:</strong>
+  <%= @profile.skill %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @profile.email %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @profile.mobile %>
+</p>
+
+<a class="btn btn-primary" href="<%=edit_profile_path(@profile)%>" role="button" style="color:white">Edit</a>
+
+
+</div>
+</div>
+
+
+<%end%>
 <% end %>
                             
 

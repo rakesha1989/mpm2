@@ -9,8 +9,9 @@ class Ability
         can :create, :all
     elsif user.role? "user"
         can :read, Meeting #index & show 
-        can :manage, Plan
-        can :manage, Assignment 
+        can :read, Plan
+        can :read, Assignment 
+        can :create, Assignment
         can :manage , Profile   
     end
 

@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<div class="row">
+<div class="col-md-7">
 <h1>Listing Activities</h1>
 
 <table class="table table-bordered", id="myTable"> 
@@ -22,12 +24,16 @@
     <% end %>
   </tbody>
 </table>
-
-
-
-            
-            
-
-<br>
-<%= button_to "New Activity", new_activity_path , :class => "btn btn-primary", :method => :get %>
+</div>
+<div class="col-md-5 padding">
+<div class="panel panel-primary" style="margin-top: 10px;">
+  <div class="panel-heading">
+    <h3 class="panel-title fonts">New Activity</h3>
+  </div>
+  <div class="panel-body">
+  <%= render 'form' %>
+  </div>
+  </div>
+</div>
+</div>
 

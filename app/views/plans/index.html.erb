@@ -28,6 +28,7 @@
                       <th>Meeting</th>
                       <th>Priority</th>
                       <th>Rating</th>
+                      <th>No Of Assignments</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -41,6 +42,7 @@
                         <td><%= plan.meeting.plan_month.strftime("%b %Y") %></td>
                         <td><%= plan.priority.name %></td>
                         <td><%= plan.rating %></td>
+                        <td><%= plan.assignments.size %>
                         <td><%= link_to plan do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
                             <%= link_to edit_plan_path(plan) do %><span class= "glyphicon glyphicon-pencil"></span>
                             <% end %>|
@@ -52,7 +54,7 @@
 
                 <br>
                 <% if can? :create, Plan.new %>
-                <%= button_to "New Plan", new_plan_path, :class => "btn btn-primary", :method => :get %>
+                <%= link_to "New Plan", new_plan_path, class:"btn btn-primary"%>
                 
                 <% end %>
 
@@ -70,21 +72,21 @@
         </a>
       </h4>
     </div>
-<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" style = "width:100%; padding:30px;">
 
 
-                    <%= data = {} %>
+                    <% data = {} %>
                     <% for priority in Priority.all %>
                     <% data ["#{priority.name}"] = priority.plans.count %>
                     <% end %>
-                    <%= pie_chart(data) %>
+                    <%= pie_chart(data, width:"100%") %>
 
                     <% plans = {} %>
                     <% Plan.all.each do |plan| %>
                       <% plans["#{plan.name}"] = plan.assignments.size %>
                       <% end %>
 
-                    <%= bar_chart(plans) %> 
+                    <%= bar_chart(plans, width:"100%" )%> 
 
 </div>
 </div>
@@ -119,4 +121,9 @@
 </div>
 </div>
 </div>
+<style >
+  .details:hover{
+    
+  }
+</style>
 

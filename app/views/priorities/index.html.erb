@@ -1,4 +1,6 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+<div class="col-md-7">
 
 <h1>Listing Priorities</h1>
 
@@ -22,13 +24,22 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
+<div class="col-md-5">    
 
-            
-            
+<div class="panel panel-primary" style="margin-top: 120px;">
+  <div class="panel-heading">
+    <h3 class="panel-title">New Priority</h3>
+  </div>
+  <div class="panel-body">
 
+<%= render 'form' %>          
+</div>
+</div>
+</div>
+</div>
 <br>
-<%= button_to "New Priority", new_priority_path , :class => "btn btn-primary", :method => :get %>
 
 
 

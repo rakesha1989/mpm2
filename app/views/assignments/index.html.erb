@@ -8,6 +8,7 @@
       <th>Activity</th>
       <th>Name</th>
       <th>Due at</th>
+      <th>Assigned To</th>
       <th>Category</th>
       <th>Is completed</th>
       <th>Actions</th>
@@ -20,6 +21,9 @@
         <td><%= assignment.activity.name %></td>
         <td><%= assignment.name %></td>
         <td><%= assignment.due_at.strftime("%b %Y %H") %></td>
+        <td><%assignment.users.pluck(:email).each do |email|%>
+              <p><%=email%></p>
+            <%end%></td>
         <td><%= assignment.category.name %></td>
         <td><%= assignment.is_completed %></td>
         <td><%= link_to assignment do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
@@ -37,6 +41,6 @@
 
 <br>
 <% if can? :create, @assignment %>
-<%= button_to "New Assignment", new_assignment_path, :class => "btn btn-primary", :method => :get %>
+<%= link_to "New Assignment", new_assignment_path, class:"btn btn-primary"%>
 
 <% end %>

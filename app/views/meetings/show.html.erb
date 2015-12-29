@@ -2,10 +2,10 @@
 
 <div class="well well-sm">
   <strong>Plan month:</strong>
-  <%= @meeting.plan_month.strftime('%B %y') %> | <strong>Category:</strong>
+  <%= @meeting.plan_month.strftime('%B %Y') %> | <strong>Category:</strong>
   <%= @meeting.category %> | <strong>Date:</strong>
   <%= @meeting.date.strftime("%A %d %b %y %R") %> | <strong>Company:</strong>
-  <%= @meeting.company.name %> |
+  <%= @meeting.company.name %> 
 
 <% if can? :update, @plan %>
   <a class="btn btn-primary" href="<%=edit_meeting_path(@meeting)%>" role="button" style="color:white">Edit</a><% end %>
@@ -19,18 +19,32 @@
 
 <div class = "row">
   <div class = "col-md-8">
+  
 
-<%= data = {} %>
+<% data = {} %>
 <% for status in Status.all %>
-<% data ["#{status.name}"] = status.plans.count %>
+  <%@count=0%>
+  <%for plan in @meeting.plans %>
+    <%if plan.status_id == status.id%>
+      <%@count=@count+1%>
+    <%end%>
+  <%end%>
+  <% data ["#{status.name}"] = @count %>
 <% end %>
+
 <%= pie_chart(data) %>
 
 
 
-<%= data = {} %>
+<% data = {} %>
 <% for status in Status.all %>
-<% data ["#{status.name}"] = status.plans.count %>
+  <%@count=0%>
+  <%for plan in @meeting.plans %>
+    <%if plan.status_id == status.id%>
+      <%@count=@count+1%>
+    <%end%>
+  <%end%>
+<% data ["#{status.name}"] = @count %>
 <% end %>
 <%= column_chart(data) %>
   
@@ -68,7 +82,7 @@
   </div>
   <div class="field">
     <%= f.label :meeting_id %><br>
-    <%= f.collection_select :meeting_id, Meeting.all, :id, :category, prompt: "Select Meeting" %>
+    <%= f.collection_select :meeting_id, Meeting.all, :id, :formatted_date, prompt: "Select Meeting" %>
   </div>
   <div class="field">
     <%= f.label :priority_id %><br>

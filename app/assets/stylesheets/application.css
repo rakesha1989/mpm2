@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+.fonts{
+	font-family: serif;
+}
+.padding{
+	padding-top:120px;
+}
+.btn-fix{
+	width:100%;
+}

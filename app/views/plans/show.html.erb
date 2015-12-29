@@ -30,12 +30,20 @@
 
 
       <% completed_assignments = @plan.assignments.where('is_completed = ?', true) %>
-
-
-      <% data = {"completed" => completed_assignments.size, "assigned" => assigned_assignments.size, "over_due" => over_due_assignments.size} %>
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3 style="text-align:center">Status Bar Graph</h3></div>
+          <div class="panel-body">
+      
+            <% data = {"completed" => completed_assignments.size, "assigned" => assigned_assignments.size, "over_due" => over_due_assignments.size} %>
 
       <%= column_chart(data) %>
+     </div>
+      </div>
 
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3 style="text-align:center">Status Timeline Graph</h3></div>
+          <div class="panel-body">
+      
       <% dates = [] %>
       <% @plan.assignments.order('due_at').each do |assignment| %>
       <% dates.push(["#{assignment.name}", (@plan.start_date > assignment.due_at - 1.days) ? @plan.start_date : (assignment.due_at - 1.days), assignment.due_at]) %>
@@ -45,6 +53,8 @@
 
 
   </div>
+   </div>
+   </div>
 
   <div class = "col-md-4">
 
@@ -141,10 +151,8 @@
            <div class="panel panel-default">
               <div class="panel-heading">
                  Assigned to <br/>
-           
-           <% for user in assignment.users %>
-           <%= user.email %>
-           <% end %>
+
+            <%= assignment.users.pluck(:email).join(", ") %>
            
            </div>
                 <div class="panel-body">
@@ -180,7 +188,7 @@
             <div class="panel-body">
 
          <%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> ago </small>
-         <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %>
+         <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id), class:"btn btn-danger" %>
          </div>
          </div>
          <% end %>
@@ -204,8 +212,7 @@
          <div class="panel panel-default">
             <div class="panel-body">
          <%= assignment.name %> <small><%= time_ago_in_words(assignment.due_at) %> from now </small>
-         <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id) %>
-         <%= link_to "mark as pending", assignments_mark_as_pending_path(assignment_id: assignment.id) %>
+         <%= link_to "mark as complete", assignments_mark_as_complete_path(assignment_id: assignment.id), class:"btn btn-danger"  %>
          </div>
          </div>
          <% end %>

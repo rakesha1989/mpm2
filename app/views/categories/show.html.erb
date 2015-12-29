@@ -3,20 +3,54 @@
 
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Category Details</h3>
+    <h3 class="panel-title">Asignments listing For <%=@category.name%></h3>
   </div>
 <div class="panel-body">
+<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
+<h1>Listing Assignments</h1>
+
+<table class="table table-bordered", id="myTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Due at</th>\
+      <th>Is completed</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.name %></td>
+        <td><%= assignment.due_at.strftime("%b %Y %H") %></td>
+        <td><%= assignment.is_completed %></td>
+        <td><%= link_to assignment do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
+            <%= link_to edit_assignment_path(assignment) do %><span class= "glyphicon glyphicon-pencil"></span>
+                            <% end %>|
+            <%= link_to assignment, method: :delete, data: { confirm: 'Are you sure?' } do %><span class= "glyphicon glyphicon-trash"></span><% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 
-<a class="btn btn-primary" href="<%=edit_category_path(@category)%>" role="button" style="color:white">Edit</a>
-<a class="btn btn-primary" href="<%=categories_path%>" role="button" style="color:white">Back</a>
+            
+            
+
+<br>
+<% if can? :create, @assignment %>
+<%= button_to "New Assignment", new_assignment_path, :class => "btn btn-primary", :method => :get %>
+
+<% end %>
+
+
+
+
 
 
 
 </div>
 </div>
+

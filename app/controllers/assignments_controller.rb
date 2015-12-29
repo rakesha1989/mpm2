@@ -6,7 +6,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments
   # GET /assignments.json
   def index
-    @assignments = (current_user.role? "director") ? Assignment.all : current_user.assignments
+    @assignments = (current_user.role? "director") ? Assignment.all.order(due_at: :desc)  : current_user.assignments.order(due_at: :desc)
   end
 
   # GET /assignments/1
@@ -80,11 +80,7 @@ def mark_as_incomplete
     redirect_to :back
   end
 
-def mark_as_pending
-    @assignment = Assignment.find(params[:assignment_id])
-    @assignment.update_attributes(due_at: Date.today - 1)
-    redirect_to :back
-end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

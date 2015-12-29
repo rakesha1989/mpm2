@@ -5,16 +5,21 @@ class ActivitiesController < ApplicationController
   # GET /activities.json
   def index
     @activities = Activity.all
+    @activity = Activity.new
   end
 
   # GET /activities/1
   # GET /activities/1.json
   def show
+    @activity=Activity.find(params[:id])
+    @assignments=@activity.assignments
+
   end
 
   # GET /activities/new
   def new
     @activity = Activity.new
+
   end
 
   # GET /activities/1/edit
@@ -28,7 +33,7 @@ class ActivitiesController < ApplicationController
 
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
+        format.html { redirect_to activities_path, notice: 'Activity was successfully created.' }
         format.json { render :show, status: :created, location: @activity }
       else
         format.html { render :new }

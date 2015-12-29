@@ -1,6 +1,18 @@
-<h1>Editing Meeting</h1>
+<div class="container">
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-5">
+<div class="panel panel-primary" style="margin-top: 10px;">
+  <div class="panel-heading">
+    <h3 class="panel-title fonts">Edit Meeting</h3>
+  </div>
+  <div class="panel-body">
+<%= render 'form' %><br>
 
-<%= render 'form' %>
+<%= link_to 'Back', meetings_path, class:"btn btn-primary btn-fix" %>
 
-<%= link_to 'Show', @meeting %> |
-<%= link_to 'Back', meetings_path %>
+</div>
+</div>
+</div>
+</div>
+</div>

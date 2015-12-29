@@ -1,218 +1,110 @@
-<h1>Qubik Engineering Services Pvt Ltd</h1><br>
-<br><h2> Who We Are </h2>
-<p>
-QUBIK was established in 2014 with a passion of “Implementing Innovative Ideas”. We focus on providing our clients with construction related services from implementing till completion without compromising on quality with excellence. This is augmented by state-of-the-art construction business concepts. Our new construction framework for modern life has given opportunities to innovative architectural designs and our team insists on ingenious construction methods in the project that we commit to.
-</p><br>
+<h1 class="fonts" style="text-align:center; padding-top:0px">Dash Board</h1>
 
-<h2> Our Vision </h2>
+	<div class="row">	
+	 <div class="col-md-6">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+		      <h3 class="panel-title">Plans Calender</h3>
+		  </div>
+			<div class="panel-body">
+				<script type="text/javascript">
+			  $(function() {
+			    $('#calendar').fullCalendar({
+			      header: {
+			        left:   'today,prev,next',
+			        center: 'title',
+			        right:  'month,agendaWeek,agendaDay'
+			      },
 
-<p>
-We believe in pioneering ideas through R&D in the field of construction. QUBIK focuses on continual improvement through leadership, teamwork and close co-ordination with our Subcontractors, Vendors, Clients and Customers. We commit to the services we provide with underlying efficient solutions.
-</p><br>
+			      events: [
+			      <% for meeting in @meetings%>
+			        <% for plan in meeting.plans %>
+			          {
+			            title: '<%=plan.name%>',
+			            start: '<%=plan.start_date.iso8601%>',
+			            url: '<%="/plans/#{plan.id}"%>'
+			          },
+			        <% end %>
+			        <% end %>
+			      ]
+			     	});
 
-<h2> Mission </h2>
-<p>
-We fulfill the dreams and needs of our clients through our excellent quality benchmarks, innovative technologies, global safety standards and cost effectiveness. QUBIK aims at delivering construction achievements with utility of  advanced technologies,  exceeding customer expectations, on time.
-</p><br>
-<h2> Objective </h2>
-<p>
-We provide the highest quality standards and services in the construction industry with optimum resource utilisation, as per customer needs. We undertake a wide range of projects of various scales, regardless of Project value.
-</p><br>
-<h2> What We Do </h2>
-<p>
-QUBIK provides a comprehensive  range of construction services without conceding on quality . We create high-functioning, high-density environments that blend utility with thoughtful planning and design. Our diversified experience has rendered us successful completion of a large number of initiated projects in:<br>
-	•	Architecture
-	•	Structural Design Consultancy
-	•	Engineering consultancy
-	•	Project Management Consultancy
-	•	Quantity Estimation & Surveying
-	•	Interior Design
-	•	ISOL & CONSOL
-	•	Green Building
-	•	Repair & Rehabilitations
-	•	Research and Development. <br>
-</p>
-<h2> Architecture </h2>
-<p>
-We have an enormous experience in various  architectural projects and strive to attain energy-efficient and sustainable architectural systems. From conceptual analysis of projects to the most detailed of works, we, at QUBIK, take pride in providing our customers with a reality woven from their dreams.<br>
- We have partnered with Public, Private and Rural Development Sectors lending our expertise in architectural designing, across the nation. 
-Our Architecture Service Includes:
-	•	Facilities Planning
-	•	Conceptual Design Studies
-	•	Schematic-Design and Design Development
-	•	Approval Documentation
-	•	Specifications
-	•	Bid Documentation
-	•	Detailed Construction Documentation Planning.
-	•	Periodic Site Supervision<br>
-Our Architectural Focus:
-	•	Multi-storey Building
-	•	Residential
-	•	Industrial
-	•	Commercial
-	•	Retail Sector
-	•	Health Sector
-	•	Educational Sector
-	•	Recreational Sector<br>
-Our comprehensive architectural team also assists contractor bidding and / or negotiating with construction contract administration. We believe that it is important to create lasting business environments with value that meets and exceeds our client's expectations also by focusing on rural areas with low cost building techniques. We have also successfully collaborated with several architecture and project management teams for the completion of construction projects. Our architectural team has succeeded in completing tasks within given time-frame.
-</p><br>
-<h2> Structural Design Consultancy </h2>
-<p>
-Structural engineering with strength, safety and serviceability are QUBIK’S core strengths. We have knowledge of traditional and innovative techniques in Structural Designing, which we implement for our clients. QUBIK structural engineering team uses the latest softwares (STAAD Pro, ETABS, SAFE & MIDAS) to design efficient structures, comply with  utmost stringent work ethics and develop advanced solutions that efficiently suit difficult site conditions too. 
-</p>
-
-<p>
-Our Structural Projects Include: 
-	•	Reinforced cement concrete structures
-	•	Steel Structures
-	•	Composite structures<br>
-</p>
-<p>
-We Design For:
-	•	Multi-storey Building
-	•	Residential
-	•	Industrial
-	•	Commercial
-	•	Retail Sector
-	•	Health Sector
-	•	Educational Sector
-	•	Recreational Sector<br>
-Our experts in the Structural Designing Team have shown that we make a real difference, by adopting challenges from all projects given to us. We ensure rendering Structural Design solutions and support , adding value to your project cost effectively.
-</p><br>
-
-<h2> Engineering Consultancy  </h2>
-<p>
-QUBIK manages projects in all aspects of construction requirements, providing manpower till completion, focusing on our core capability in Construction. Our competency in delivering projects on time and adhering to budgets ensures monitoring of committed schedule. We support our client’s requirement by implementing inventive ideas.  It is an appreciation to QUBIK’S values as one of the leading Engineering Consultancy Services; committed with dedication and the highest level of involvement.  Each member of the QUBIK family is motivated to the highest degree, making our vision successful.<br> 
-	•	Provide Manpower			Contract Administration	
-	•	Quality Inspection 			Field Supervision and Monitoring Progress	
-	•	Cost and Variance Analysis	Certifying Contractor's Bills	
-	•	Bid evaluation  and Negotiation Pre-qualification of Contractors and Bidding
-QUBIK does not compromise on client commitments or business associate relations - We are backed by highly trained employees and a highly qualified expertise management team, ensuring that customer expectations  are met without flaws. <br>
-QUBIK remains as the market leader in providing engineering consultation.
-We wholeheartedly welcome feedback from our customers regarding the quality of our work .
-</p><br>
-<h2> Project Management Consultancy </h2>
-<p>
-We offer complete Project Management Solutions from execution till completion as committed, at competitive prices. We are transparent with our Clients. We have successfully partnered with Public, Private and Rural Development Sectors,  lending our expertise in Project Management Solutions across the nation. We have skilled manpower and infrastructure to handle all type of Project related requirement, Which includes:<br>
-	•	Analyzing Project Requirement
-	•	Evaluation of Bid Document & Selection of Contractors
-	•	Supervision of Works as per Blue Print Specifications
-	•	Preparation of Implemented Schedule using CPM / PERT Tools
-	•	Verification of Layout of all Structures
-	•	Preparation of Additional Drawings & Sketches
-	•	Quality Assurance on Materials and Workmanship.
-	•	Progress Report in MS Projects format
-	•	Measurement, Verification & Certification of Contractors Bills.
-	•	Assist Contract Management in Resolution of Disputes & Time Extension.  
-	•	Assist in Testing, Trial Run & Commissioning.
-	•	Post Construction Services during Defect Liability Period.
-We, at QUBIK, maintain efficient interaction with Raw Material Suppliers, Contractors, Sub Contractors and Customers to assure that our projects are always completed with the highest level of quality and within time frame. We specialize in assistance from Bidding processes and  Vendor selection, to Construction administration. Our expertise in Project Management ensures timely delivery of projects within customer budget.
-</p><br>
-<h2> Quantity Estimation & Surveying </h2>
-<p>
-We specialize in various panels of Estimation & Surveying with our creative in-house team; We are well versed with long-lasting construction techniques with cost-effectiveness in survey processes. Our Estimation team contributes in streamlining for projects ,on – time, and within-budget.<br> 
-Our Process Includes:
-	•	Design-Quality Management Reviews
-	•	Surveying Consultant Coordination
-	•	Tracking Valuation of Ongoing Projects
-	•	Preparing Estimation for Bidding Process
-	•	Estimation Budget Management
-	•	Design Estimation Scheduling 
-	•	Project Completion Forecasting
-	•	Evaluation of Agreement Claims 
-</p><br>
-<p>
-Providing Services For: 
-	•	Residential
-	•	Commercial
-	•	Highways
-	•	Drainage system
-	•	Bridges & Tunnels
-	•	Hydro Projects
-	•	Dams & Canals
-	•	Industries<br>
-QUBIK has a team of dedicated & committed personnel who are highly skilled in implementation of Estimation and Surveying with utmost precision. Our in-house team also coordinates the execution of projects to ensure it is proposed as per Client requirements. We have an enormous experience in the above mentioned processes & services.
-</p><br>
-<h2> Interior Design </h2>
-<p>
-Interior design is an integral aspect of all  architecture projects. We approach this creative arena with the same attention to creativity, and we convert our clients' aspirations into reality. Our creative designing team offers smart responses to your goals and requirements; Focusing on generating interior design that complements the various of architecture.  We integrate designs for our customers with assurance of striking visual appeal, effortless utility and supreme comfort. QUBIK provides Interior Design services for utmost customer satisfaction.<br>
-Our Services Include:
-	•	Interior Space Construction Planning
-	•	Custom-made and Modular Furniture
-	•	Fabric Selection
-	•	Artwork Selection
-	•	Furniture Selection, Procurement installation and maintenance
-	•	Complete Data, Telephony and Audio Visual Services
-	•	Mechanical, Electrical and Plumbing Design and Execution<br>
-We Expertise In:  
-	•	Residential
-	•	Office Space 
-	•	Hotels & Restaurants
-	•	Malls & Showrooms
-	•	Multiplexes & Theatres
-	•	Hospitals
-	•	Educational Institutes
-QUBIK also provides exclusive interior design solutions to clients dependent upon their spatial requirements, schedule and budgetary parameters. Design for crucial areas such as lobbies, conference and meeting halls, interior landscaping, and coordination with interior HVAC, electrical, UPS, Access Control, CCTV, Floor and Workstation Wire Management are also prime aspects of our services. 
-</p><br>
-<h2> Green Building </h2>
-<p>
-With the increasing demand for strategic green economic growth across the globe, QUBIK focuses on Green Building Construction. We focus our commitment to construction industries across the nation, and have been proven as market leaders in Green Building Technologies. Our Green projects are financially more feasible due to Government initiated incentives and low operation and maintenance costs.<br>
-Benefits of Green Building Principles:
-	•	Energy Efficiency 
-	•	Water Efficiency
-	•	Conserve Materials and Resources 
-	•	Improvises the purity of living 
-	•	Improvises Work Culture with Green House Concept
-	•	Reduce your carbon footprint.<br>
-Environment Friendly Green House Includes:
-	•	Lawns and Rooftop Gardens
-	•	Rain Water Harvesting
-	•	Usage of recycled water
-	•	Solar Power Usage and Wind Turbines
-	•	Usage of alternative natural resources
-	•	Environment Health & Safety [EHS] for Residents & Neighbours 
-QUBIK is proud to offer affordable green building options in construction of residential, industrial, commercial & institutional facilities. Our green building services are completely customizable to  suit client’s needs via. Sustainable design.
-</p><br>
-<h2> R & D </h2>
-<p>
-Our Research & Development team focuses the future, with deep understanding of the past and present Construction methodologies. We propose construction policies that will be sustainable for future generations. <br>
-We Focus On 
-	•	Highways
-	•	Drainage system
-	•	Bridges & Tunnels
-	•	Hydro Projects
-	•	Dams & Canals
-	•	Industries
-The experience gained from operating with low-energy resource and high-population density environments has endowed us with a particular vision that is invaluable to eco-friendly urban planning around the globe. We partner with private and public sectors domestically for building management research. 
-</p><br>
-<h2> Repair & Rehabilitations </h2>
-<p>
-We provide repair & rehabilitation solutions for both Residential and Commercial buildings.<br> 
-Our Planning Includes: 
-	•	Field Investigations
-	•	Investigate Extent of Damage.
-	•	Analyzing Interior Design Feasibility.
-	•	Type of Existing Structure & its Stability.
-	•	Examining Construction Blue Print.
-	•	Repair and Rehabilitations Cost Estimates.
-	•	Redesigning Existing Structure for Nature Forces.
-	•	Identification of Building Components required to be strengthened.<br>
-	•	
-Our Procedures Are:
-	•	Implementing Corrosion Resistance Plaster
-	•	Beam Jacketing & Strengthening
-	•	Cross Wall Connection Strengthening
-	•	Strengthening of Wall Around Door & window
-	•	Compressing the Walls for Box Action
-	•	Strengthening of Cracked Wall, Slab & Rafter Roof 
-	•	Stiffening roof Resting On Stone 
-	•	Strengthening of Multiple Cracked Wall
-	•	Connection of New brick Wall with Stone Masonry <br>
-Our corporate culture is to serve our clients in a quick and cost-efficient manner. We are recognized for our expertise in the repair of post tensioned structures, basement structures, foundations and high rise structures. It is a comprehensive task with efficient planning.
-</p><br>
-<p>
-Work With Us
-QUBIK always welcomes aspired innovators from civil industry with preference to multi-disciplinary qualifications with or without experience, but with aspirations. We are interested in receiving profile from Aspirants who have a passion to establish a long-lasting career with QUBIK.
-QUBIK gives equal opportunities for its employees and aspirants from all backgrounds. If you would like to submit your profile, Send us a covering letter and updated resume details to career@qubik.com and QUBIK will get back to you!
-
-</p>
+					});
+				</script>
+				<div id="calendar"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row">	
+		<div class="col-md-6">
+			<div class="panel panel-primary">
+			  <div class="panel-heading">
+			      <h3 class="panel-title">Category Listing</h3>
+			  </div>
+				<div class="panel-body">
+					<%data = {}%>
+					<table class="table table-bordered", id ="myTable">
+					  <thead>
+					    <tr>
+					      <th>Name</th>
+					      <th>No Of Assignments</th>
+					      <th>Actions</th>
+					    </tr>
+					  </thead>
+						<tbody>
+					    <% @categories.each do |category| %>
+					    <% data ["#{category.name}"] = category.assignments.count %>
+					      <tr>
+					        <td><%= category.name %></td>
+					        <td><%= category.assignments.count%></td>
+					        <td><%= link_to category do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
+					            <%= link_to edit_category_path(category) do %><span class= "glyphicon glyphicon-pencil"></span>
+					                            <% end %>|
+					            <%= link_to category, method: :delete, data: { confirm: 'Are you sure?' } do %><span class= "glyphicon glyphicon-trash"></span><% end %></td>
+					      </tr>
+					    <% end %>
+					  </tbody>
+				</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-primary">
+			  <div class="panel-heading">
+			      <h3 class="panel-title">Rating Listing</h3>
+			  </div>
+				<div class="panel-body">
+					<%ratings=Plan.all.pluck(:rating).uniq%>
+					<%datas = {}%>
+			   	<%count=1%>
+					<table class="table table-bordered", id ="myTable">
+			  		<%for rating in ratings%>
+			    		<tr>
+				    		<td>Rating <%=rating%></td>
+			   				<td><%=Plan.where("rating = ?",rating).count%></td>
+			    		</tr>
+			    		<% datas ["Rating #{rating}"] = @plan.where("rating= ?",rating).size %>
+			    		<%count+=1%>
+						<%end%>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">	
+		<div class="panel panel-default">
+	    <div class="panel-heading"><h3 style="text-align:center">Status Bar Graph</h3></div>
+	    <div class="panel-body">
+	      <%= column_chart(data) %>
+			</div>
+		</div>
+	</div>
+	<div class="row">	
+		<div class="panel panel-default">
+	    <div class="panel-heading"><h3 style="text-align:center">Rating Bar Graph</h3></div>
+	    <div class="panel-body">
+	      	<%= column_chart(datas) %>
+			</div>
+		</div>
+	</div>

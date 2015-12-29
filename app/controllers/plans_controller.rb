@@ -4,7 +4,7 @@ class PlansController < ApplicationController
   # GET /plans
   # GET /plans.json
   def index
-    @plans = Plan.all
+    @plans = Plan.all.order(start_date: :desc)
   end
 
   # GET /plans/1

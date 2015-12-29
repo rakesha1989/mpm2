@@ -4,12 +4,15 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = (current_user.role? "director") ? Profile.all : current_user.profile 
+    @profile = current_user.profile 
+    @profiles = Profile.all
   end
 
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @profile=Profile.find(params[:id])
+    @assignments=@profile.user.assignments
   end
 
   # GET /profiles/new
@@ -26,9 +29,8 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
 
-    if current_user.role? "user"
       @profile.user_id=current_user.id
-    end
+
     respond_to do |format|
       if @profile.save
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }

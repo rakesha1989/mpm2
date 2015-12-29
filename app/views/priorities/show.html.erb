@@ -3,20 +3,57 @@
 
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Priority Details</h3>
+    <h3 class="panel-title">Plan listing For <%=@priority.name%></h3>
   </div>
 <div class="panel-body">
+<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @priority.name %>
-</p>
+<h1>Listing Plans</h1>
 
 
-<a class="btn btn-primary" href="<%=edit_priority_path(@priority)%>" role="button" style="color:white">Edit</a>
-<a class="btn btn-primary" href="<%=priorities_path%>" role="button" style="color:white">Back</a>
+
+                <table class="table table-bordered", id="myTable">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Start date</th>
+                      <th>Status</th>
+                      <th>Meeting</th>
+                      <th>Rating</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% @plans.each do |plan| %>
+                      <tr>
+                        <td><%= plan.name %></td>
+                        <td><%= plan.start_date %></td>
+                        <td><%= plan.status.name %></td>
+                        <td><%= plan.meeting.plan_month.strftime("%b %Y") %></td>
+                        <td><%= plan.rating %></td>
+                        <td><%= link_to plan do %><span class= "glyphicon glyphicon-eye-open"></span><% end %>|
+                            <%= link_to edit_plan_path(plan) do %><span class= "glyphicon glyphicon-pencil"></span>
+                            <% end %>|
+                            <%= link_to plan, method: :delete, data: { confirm: 'Are you sure?' } do %><span class= "glyphicon glyphicon-trash"></span><% end %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+
+                <br>
+                <% if can? :create, Plan.new %>
+                <%= button_to "New Plan", new_plan_path, :class => "btn btn-primary", :method => :get %>
+                
+                <% end %>
+
+
+
+
+
 
 
 
 </div>
 </div>
+

@@ -23,4 +23,8 @@ def self.details
 	Plan.where("start_date > ?", Date.today)	
 end
 
+def formatted_date
+	"#{plan_month.strftime("%B %Y")}"
+end	
+
 end

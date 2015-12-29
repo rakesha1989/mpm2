@@ -5,11 +5,14 @@ class StatusesController < ApplicationController
   # GET /statuses.json
   def index
     @statuses = Status.all
+    @status = Status.new
   end
 
   # GET /statuses/1
   # GET /statuses/1.json
   def show
+    @status=Status.find(params[:id])
+    @plans=@status.plans
   end
 
   # GET /statuses/new
@@ -28,7 +31,7 @@ class StatusesController < ApplicationController
 
     respond_to do |format|
       if @status.save
-        format.html { redirect_to @status, notice: 'Status was successfully created.' }
+        format.html { redirect_to statuses_path, notice: 'Status was successfully created.' }
         format.json { render :show, status: :created, location: @status }
       else
         format.html { render :new }

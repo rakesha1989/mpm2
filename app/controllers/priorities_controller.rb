@@ -5,11 +5,14 @@ class PrioritiesController < ApplicationController
   # GET /priorities.json
   def index
     @priorities = Priority.all
+    @priority = Priority.new
   end
 
   # GET /priorities/1
   # GET /priorities/1.json
   def show
+    @priority=Priority.find(params[:id])
+    @plans=@priority.plans
   end
 
   # GET /priorities/new
@@ -28,7 +31,7 @@ class PrioritiesController < ApplicationController
 
     respond_to do |format|
       if @priority.save
-        format.html { redirect_to @priority, notice: 'Priority was successfully created.' }
+        format.html { redirect_to priorities_path, notice: 'Priority was successfully created.' }
         format.json { render :show, status: :created, location: @priority }
       else
         format.html { render :new }
